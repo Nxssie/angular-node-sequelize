@@ -1,5 +1,5 @@
 module.exports = app => {
-  const cars = require("../controllers/car.controller.js");
+  const cars = require("../controllers/car.controller");
 
   var router = require("express").Router();
 
@@ -21,5 +21,5 @@ module.exports = app => {
   // // Create a new Box
   // router.delete("/", cars.deleteAll);
 
-  // app.use('/api/cars', router);
+  app.use('/api/cars', router);
 };

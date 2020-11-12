@@ -32,6 +32,7 @@ exports.create = (req, res) => {
 
 // Retrieve all cars
 exports.findAll = (req, res) => {
+  console.log("its working.");
   Car.findAll()
       .then(data => {
           res.send(data);
