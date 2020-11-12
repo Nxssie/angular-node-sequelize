@@ -19,14 +19,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("../models");
 
 // For explotation. Database is not dropped.
-db.sequelize.sync(); 
+// db.sequelize.sync(); 
 
 //Development only. Drops and re-sync db everytime the server starts.
-/*db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
-});*/
+});
 
-require("../routes/car.routes")(app);
+require("../routes/task.routes")(app);
 
 app.listen(port, () => {
   console.log('Server started on: ' + port);
