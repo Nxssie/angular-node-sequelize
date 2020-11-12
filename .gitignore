@@ -1,5 +1,7 @@
 /backend/node_modules
 /backend/.env
+/backend/.idea/
 
 /frontend/node_modules
-/froentend/.env
+/frontend/.env
+/frontend/.idea/
