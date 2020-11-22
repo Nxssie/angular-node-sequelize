@@ -3,7 +3,8 @@ export class Task {
     id!: number;
     title!: string;
     description!: string;
-    done!: boolean;
+    done!: string;
+    userId!: number;
     createdAt!: Date;
     updatedAt!: Date;
 

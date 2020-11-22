@@ -3,7 +3,13 @@
     <mat-card *ngFor="let t of tasks" class="mt-4">
       <mat-card-header>
         <mat-card-title>{{t.title}}</mat-card-title>
-        <mat-card-subtitle>{{t.done}} - {{t.userId}}</mat-card-subtitle>
+        <mat-card-subtitle>
+          User: {{t.userId}}
+          <span *ngIf="t.done; else undone" id="task-status">Done</span>
+          <ng-template #undone>
+            <span id="task-status">Undone</span>
+          </ng-template>
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>{{t.description}}</mat-card-content>
       <mat-card-actions>
