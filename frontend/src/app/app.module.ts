@@ -21,6 +21,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddTaskComponent } from './components/tasks/add-task/add-task.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     AboutComponent,
     ProfileComponent,
     TasksComponent,
-    SettingsComponent
+    SettingsComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,

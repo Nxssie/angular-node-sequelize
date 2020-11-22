@@ -10,7 +10,6 @@ import { TaskService } from '../../services/task.service'
 export class TasksComponent implements OnInit {
 
   tasks!: Task[];
-  doneElement = false;
 
   constructor(private taskService: TaskService) { }
 
@@ -28,15 +27,6 @@ export class TasksComponent implements OnInit {
     this.taskService.getAll().subscribe(tasks => {
       this.tasks = tasks;
     })
-  }
-
-  checkTasks(){
-    for (let index = 0; index < this.tasks.length; index++) {
-      if(this.tasks[index].done == "true") {
-        this.doneElement = true;
-      }
-      
-    }
   }
 
 }

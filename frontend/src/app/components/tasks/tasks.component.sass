@@ -1,4 +1,4 @@
-#task-status
+#task-done
     position: absolute
     display: block
     margin-top: 2em
@@ -7,3 +7,69 @@
     left: 100
     bottom: 10
     right: 0
+    color: #4caf50
+
+#task-undone
+    position: absolute
+    display: block
+    margin-top: 2em
+    margin-right: 2em
+    top: 0
+    left: 100
+    bottom: 10
+    right: 0
+
+#add-button
+    position: fixed
+    right: 30px
+    bottom: 50px  
+
+#extended-desktop-button
+    position: fixed
+    left: 50%
+    bottom: 15px
+
+.extended-fab-button 
+    width: unset
+    padding: 0 26px
+    border-radius: 29px
+    display: none
+    position: relative
+    left: -50%
+
+  
+.extended-fab-button__text
+    font-weight: 300
+    letter-spacing: .1em
+    text-transform: uppercase
+
+
+
+
+// Media
+@media (min-width: 576px) 
+    #add-button
+        right: 30px
+        bottom: 15px
+    
+
+@media (min-width: 768px) 
+    #add-button
+        right: 30px
+        bottom: 15px
+    
+
+@media (min-width: 1024px) 
+    #add-button
+        display: none
+
+    .extended-fab-button 
+        display: block
+
+@media (min-width: 1200px) 
+    #add-button
+        display: none
+
+    .extended-fab-button 
+        display: block
+

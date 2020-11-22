@@ -11,7 +11,6 @@ var core_1 = require("@angular/core");
 var TasksComponent = /** @class */ (function () {
     function TasksComponent(taskService) {
         this.taskService = taskService;
-        this.doneElement = false;
     }
     TasksComponent.prototype.ngOnInit = function () {
         this.getAll();
@@ -26,13 +25,6 @@ var TasksComponent = /** @class */ (function () {
         this.taskService.getAll().subscribe(function (tasks) {
             _this.tasks = tasks;
         });
-    };
-    TasksComponent.prototype.checkTasks = function () {
-        for (var index = 0; index < this.tasks.length; index++) {
-            if (this.tasks[index].done == "true") {
-                this.doneElement = true;
-            }
-        }
     };
     TasksComponent = __decorate([
         core_1.Component({

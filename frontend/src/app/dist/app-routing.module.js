@@ -14,13 +14,15 @@ var home_component_1 = require("./components/home/home.component");
 var profile_component_1 = require("./components/profile/profile.component");
 var settings_component_1 = require("./components/settings/settings.component");
 var tasks_component_1 = require("./components/tasks/tasks.component");
+var add_task_component_1 = require("./components/tasks/add-task/add-task.component");
 var routes = [
     { path: 'home', component: home_component_1.HomeComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'profile', component: profile_component_1.ProfileComponent },
     { path: 'mytasks', component: tasks_component_1.TasksComponent },
     { path: 'settings', component: settings_component_1.SettingsComponent },
-    { path: 'about', component: about_component_1.AboutComponent }
+    { path: 'about', component: about_component_1.AboutComponent },
+    { path: 'add-task', component: add_task_component_1.AddTaskComponent }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

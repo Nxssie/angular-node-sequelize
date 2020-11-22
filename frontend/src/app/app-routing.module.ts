@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { TasksComponent } from './components/tasks/tasks.component';
+import { AddTaskComponent} from './components/tasks/add-task/add-task.component'
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'mytasks', component: TasksComponent},
   { path: 'settings', component: SettingsComponent},
-  { path: 'about', component: AboutComponent}
+  { path: 'about', component: AboutComponent},
+  { path: 'add-task', component: AddTaskComponent }
 ];
 
 @NgModule({
