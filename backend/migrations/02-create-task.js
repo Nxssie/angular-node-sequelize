@@ -11,9 +11,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       done: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "users",
+          key: "id",
+          as: "userId",
+        },
       },
       createdAt: {
         allowNull: false,

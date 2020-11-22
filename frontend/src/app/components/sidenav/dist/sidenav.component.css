@@ -4,12 +4,23 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #eee;
 }
 
 #toolbar-title {
   margin-left: 2vw;
   margin-top: 1vh;
+}
+
+.nav-icon {
+  margin-right: 1em;
+}
+
+#copyright-disc {
+  position: absolute;
+  top: 100;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 @media (min-width: 576px) {

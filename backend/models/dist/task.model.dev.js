@@ -1,5 +1,7 @@
-module.exports = (sequelize, Sequelize) => {
-  const Task = sequelize.define("task", {
+"use strict";
+
+module.exports = function (sequelize, Sequelize) {
+  var Task = sequelize.define("task", {
     title: {
       type: Sequelize.STRING
     },
@@ -8,16 +10,16 @@ module.exports = (sequelize, Sequelize) => {
     },
     done: {
       type: Sequelize.BOOLEAN
-    }    
+    }
   });
 
-  Task.associate = function(models) {
+  Task.associate = function (models) {
     Task.belongsTo(models.user, {
       onDelete: "CASCADE",
       foreignKey: "userId",
-      as: "users",
-    })
-  }
+      as: "users"
+    });
+  };
 
   return Task;
 };

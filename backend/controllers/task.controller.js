@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
       });
 };
 
-// Find a single Box with an id
+// Find a single task with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
@@ -60,6 +60,23 @@ exports.findOne = (req, res) => {
           });
       });
 };
+
+// Retrieve all tasks from an user
+exports.findAllByUserId = (req, res) => {
+    const id = req.params.id;
+
+    Task.findAll({
+        where: {userId: id}
+    }).then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving tasks."
+        });
+    });
+}
 
 // Update a task by the id in the request
 exports.update = (req, res) => {

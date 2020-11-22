@@ -17,14 +17,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // database conection
 const db = require("../models");
+const { sequelize } = require('../models');
+//const { SET_DEFERRED } = require('sequelize/types/lib/deferrable');
 
 // For explotation. Database is not dropped.
-// db.sequelize.sync(); 
+db.sequelize.sync(); 
 
 //Development only. Drops and re-sync db everytime the server starts.
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 require("../routes/task.routes")(app);
 

@@ -1,0 +1,36 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="over" role="navigation">
+    <mat-toolbar color="accent">
+      <span> Welcome, user </span>
+    </mat-toolbar>
+    <mat-action-list>
+      <button mat-list-item class="nav-button" routerLink="/home" (click)="sidenav.close()">
+          <mat-icon class="nav-icon">home </mat-icon> <span>Home</span>
+      </button>
+      <button mat-list-item class="nav-button" routerLink="/profile" (click)="sidenav.close()"> 
+        <mat-icon class="nav-icon">person </mat-icon> <span>Profile</span>
+      </button>
+      <button mat-list-item class="nav-button" routerLink="/mytasks" (click)="sidenav.close()"> 
+        <mat-icon class="nav-icon">list </mat-icon> <span>My tasks</span>
+      </button>
+      <button mat-list-item class="nav-button" routerLink="/settings" (click)="sidenav.close()"> 
+        <mat-icon class="nav-icon">settings </mat-icon> <span>Settings</span>
+      </button>
+      <button mat-list-item class="nav-button" routerLink="/about" (click)="sidenav.close()"> 
+          <mat-icon class="nav-icon">info </mat-icon> <span>About</span>
+      </button>
+    </mat-action-list>
+    <div class="container" id="copyright-disc">
+      <span>Nxssie 2020 All rights reserved.</span>
+    </div>    
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-mini-fab color="primary" (click)="sidenav.open()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <p id="toolbar-title">Task Manager</p>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
