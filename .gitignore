@@ -2,4 +2,6 @@
 /backend/.env
 
 /frontend/node_modules
-/froentend/.env
+/frontend/.env
+
+/.idea/

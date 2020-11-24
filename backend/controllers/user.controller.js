@@ -16,9 +16,9 @@ exports.create = (req, res) => {
 
   // Create a User
   let user = {
+    username: req.body.username,
     password: req.body.password,
     name: req.body.name,
-    username: req.body.username,
     isAdmin: req.body.isAdmin ? req.body.isAdmin : false
   };
 
