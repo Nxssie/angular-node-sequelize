@@ -8,6 +8,11 @@ import { MatSliderModule } from '@angular/material/slider';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +27,8 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTaskComponent } from './components/tasks/add-task/add-task.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegisterComponent } from './components/user/register/register.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,9 @@ import { AddTaskComponent } from './components/tasks/add-task/add-task.component
     ProfileComponent,
     TasksComponent,
     SettingsComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +48,9 @@ import { AddTaskComponent } from './components/tasks/add-task/add-task.component
     MatSliderModule,
     BrowserAnimationsModule,
     LayoutModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -48,6 +60,7 @@ import { AddTaskComponent } from './components/tasks/add-task/add-task.component
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
+    MatFormFieldModule,
     HttpClientModule
   ],
   providers: [],

@@ -20,14 +20,35 @@ const apiUrl = "http://localhost:4000/api/tasks";
 })
 export class TaskService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient, 
+    private router: Router) { }
 
   getAll(): Observable<Task[]> {
     return this.http.get<Task[]>(apiUrl);
   }
 
-  getCarsByUserId(id: number): Observable<Task[]> {
+  getTaskByUserId(id: number): Observable<Task[]> {
     return this.http.get<Task[]>(apiUrl + "/tasks/" + id);
+  }
+
+  addTask(task: Task, userId: number): Observable<any> {
+    let bodyEncoded = new URLSearchParams();
+    bodyEncoded.append("title", task.title);
+    bodyEncoded.append("description", task.description);
+    bodyEncoded.append("userId", task.userId.toString());
+    let body = bodyEncoded.toString();
+
+    return this.http.post(apiUrl + "/" + body, httpOptions);
+  }
+
+  updateTask(task: Task, id: number): Observable<any> {
+    let bodyEncoded = new URLSearchParams();
+    bodyEncoded.append("title", task.title);
+    bodyEncoded.append("description", task.description);
+    let body = bodyEncoded.toString();
+
+    return this.http.put(apiUrl + "/" + id, body, httpOptions);
   }
 
 }

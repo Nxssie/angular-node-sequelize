@@ -117,7 +117,7 @@ exports.update = (req, res) => {
     });
 };
 
-// // Delete a User with the specified id in the request
+/* // Delete a User with the specified id in the request
 // exports.delete = (req, res) => {
 //   const id = req.params.id;
 
@@ -157,7 +157,7 @@ exports.update = (req, res) => {
 //           err.message || "Some error occurred while removing all tutorials."
 //       });
 //     });
-// };
+// };*/
 
 // Find user by username and password
 exports.findUserByUsernameAndPassword = (req, res) => {

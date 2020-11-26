@@ -18,7 +18,7 @@ exports.create = (req, res) => {
         done: req.body.done
     };
 
-    // Save Car in the database
+    // Save Task in the database
     Task.create(task)
         .then(data => {
             res.send(data);
