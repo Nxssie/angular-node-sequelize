@@ -21,6 +21,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox'
 import { AboutComponent } from './components/about/about.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TasksComponent } from './components/tasks/tasks.component';
@@ -55,6 +56,7 @@ import { RegisterComponent } from './components/user/register/register.component
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
+    MatCheckboxModule,
     MatListModule,
     MatTableModule,
     MatPaginatorModule,

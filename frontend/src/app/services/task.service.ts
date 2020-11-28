@@ -32,14 +32,15 @@ export class TaskService {
     return this.http.get<Task[]>(apiUrl + "/tasks/" + id);
   }
 
-  addTask(task: Task, userId: number): Observable<any> {
+  addTask(task: Task): Observable<any> {
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("title", task.title);
     bodyEncoded.append("description", task.description);
+    bodyEncoded.append("done", task.done);
     bodyEncoded.append("userId", task.userId.toString());
     let body = bodyEncoded.toString();
 
-    return this.http.post(apiUrl + "/" + body, httpOptions);
+    return this.http.post(apiUrl + "/", body, httpOptions);
   }
 
   updateTask(task: Task, id: number): Observable<any> {

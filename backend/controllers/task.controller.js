@@ -4,7 +4,7 @@ const Task = db.task;
 // Create and Save a new Task
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.id) {
+    if (!req.body.title) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,7 +15,8 @@ exports.create = (req, res) => {
     const task = {
         title: req.body.title,
         description: req.body.description,
-        done: req.body.done
+        done: req.body.done,
+        userId: req.body.userId
     };
 
     // Save Task in the database

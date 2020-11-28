@@ -1,7 +1,7 @@
 <ng-container>
   <div class="container mt-4">
     <div class="row">
-      <div class="col-6">
+      <div class="col">
         <mat-card class="mt-4">
           <mat-card-header>
             <mat-card-title>
@@ -10,13 +10,20 @@
             <mat-card-subtitle></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="container">
-            <form [formGroup]="addForm">
-              <p>
-                <mat-form-field appearance="standard">
-                  <mat-label> Title: </mat-label>
-                  <input matInput formControlName="title" />
-                </mat-form-field>
-              </p>
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
+              <div class="row">
+                <div class="col-8">
+                  <mat-form-field appearance="standard">
+                    <mat-label> Title: </mat-label>
+                    <input matInput formControlName="title" />
+                  </mat-form-field>
+                </div>
+                <div class="col-4">
+                  <mat-form-field>
+                    <mat-checkbox formControlName="done" >Done</mat-checkbox>
+                  </mat-form-field>
+                </div>
+              </div>
 
               <p>
                 <mat-form-field appearance="standard">
@@ -24,29 +31,39 @@
                   <textarea matInput formControlName="description"></textarea>
                 </mat-form-field>
               </p>
+
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>User ID:</mat-label>
+                  <textarea matInput formControlName="userId"></textarea>
+                </mat-form-field>
+              </p>
+
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                id="confirm-button"
+                class="mt-4"
+              >
+                <mat-icon>check</mat-icon> Confirm
+              </button>
+
+              <button
+                mat-raised-button
+                color="primary"
+                id="cancel-button"
+                class="mt-4"
+              >
+                <mat-icon>cancel</mat-icon> Cancel
+              </button>
             </form>
           </mat-card-content>
         </mat-card>
-
-        <button
-          mat-raised-button
-          color="primary"
-          id="confirm-button"
-          class="mt-4"
-        >
-          <mat-icon>check</mat-icon> Confirm
-        </button>
-
-        <button
-          mat-raised-button
-          color="primary"
-          id="cancel-button"
-          class="mt-4"
-        >
-          <mat-icon>cancel</mat-icon> Cancel
-        </button>
       </div>
-      <div class="col-6">
+    </div>
+    <div class="row">
+      <div class="col">
         <mat-card class="mt-4">
           <mat-card-header>
             <mat-card-title>
