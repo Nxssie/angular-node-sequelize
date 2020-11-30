@@ -18,6 +18,10 @@ export class AddTaskComponent implements OnInit {
 
   addForm: FormGroup;
 
+  currentDate = new Date();
+
+  currentUser = "User";
+
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -33,13 +37,10 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  changeDescription(): void {
-    this.description;
-  }
-
   onSubmit(taskData: any) {
     if(!this.addForm.valid) {
-      console.log('Please provide all the required values!')
+      console.warn('Please provide all the required values!');
+      console.log(taskData);
     } else {
       let task = {
         title: this.addForm.value.title,
@@ -51,8 +52,6 @@ export class AddTaskComponent implements OnInit {
         this.taskService.getAll();
         this.router.navigateByUrl("/mytasks");
       })
-
-      console.warn(task);
     }
   }
 }

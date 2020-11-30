@@ -12,32 +12,31 @@
           <mat-card-content class="container">
             <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
               <div class="row">
-                <div class="col-8">
+                <div class="col-6">
                   <mat-form-field appearance="standard">
-                    <mat-label> Title: </mat-label>
+                    <mat-label>Title:</mat-label>
                     <input matInput formControlName="title" />
                   </mat-form-field>
                 </div>
-                <div class="col-4">
-                  <mat-form-field>
-                    <mat-checkbox formControlName="done" >Done</mat-checkbox>
+                <div class="col-6">
+                  <mat-checkbox id="done-checkbox" formControlName="done">Done?</mat-checkbox>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Description:</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                  <mat-form-field appearance="standard">
+                    <mat-label>User ID:</mat-label>
+                    <input matInput formControlName="userId" />
                   </mat-form-field>
                 </div>
               </div>
-
-              <p>
-                <mat-form-field appearance="standard">
-                  <mat-label>Description:</mat-label>
-                  <textarea matInput formControlName="description"></textarea>
-                </mat-form-field>
-              </p>
-
-              <p>
-                <mat-form-field appearance="standard">
-                  <mat-label>User ID:</mat-label>
-                  <textarea matInput formControlName="userId"></textarea>
-                </mat-form-field>
-              </p>
 
               <button
                 type="submit"
@@ -72,11 +71,14 @@
             <mat-card-subtitle></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="container">
-            <p>Username:</p>
-            <p>Date:</p>
-            <p>Status:</p>
-            <p>Title:</p>
-            <p>Description: {{ description }}</p>
+            <p>Username: {{ currentUser }}</p>
+            <p>Date: {{currentDate | date:'yyyy-MM-dd'}}</p>
+            <p *ngIf="addForm.value.done; else undone">Status: done</p>
+            <ng-template #undone>
+              <p>Status: undone</p>
+            </ng-template>
+            <p>Title: {{ addForm.value.title }}</p>
+            <p>Description: {{ addForm.value.description }}</p>
           </mat-card-content>
         </mat-card>
       </div>
