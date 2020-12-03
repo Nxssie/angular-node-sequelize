@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -12,8 +13,12 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  passwordPattern: string = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$";
-  namePattern: string = "^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$";
+  // requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces
+  passwordPattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$";
+
+  /*  Person's name (first, last, or both) in any letter case. Although not perfect, this expression 
+      will filter out many incorrect name formats (especially numerics and invalid special characters).*/
+  namePattern = '^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$';
 
   constructor(
     public fb: FormBuilder,
@@ -28,6 +33,25 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(userData: any) {
+    if(!this.registerForm.valid) {
+      console.warn('Please provide all the required values!');
+      console.log(userData)
+    } else {
+
+      let user = {
+        id: 0,
+        username: this.registerForm.value.username,
+        password: this.registerForm.value.password,
+        name: this.registerForm.value.name,
+        isAdmin: false
+      }
+      this.authService.register(user).subscribe((u) => {
+        this.router.navigateByUrl("/login");
+      })
+    }
   }
 
 }

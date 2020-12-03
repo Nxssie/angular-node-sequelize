@@ -1,0 +1,175 @@
+"use strict";
+
+var db = require("../models");
+
+var User = db.user;
+var Op = db.Sequelize.Op;
+
+var utils = require("../utils");
+
+var bcrypt = require('bcryptjs'); // Create and Save a new User
+
+
+exports.create = function (req, res) {
+  //Validate request
+  if (!req.body.password || !req.body.username) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  } // Create a User
+
+
+  var user = {
+    username: req.body.username,
+    password: req.body.password,
+    name: req.body.name,
+    isAdmin: req.body.isAdmin ? req.body.isAdmin : false
+  };
+  User.findOne({
+    where: {
+      username: user.username
+    }
+  }).then(function (data) {
+    if (data) {
+      var result = bcrypt.compareSync(user.password, data.password);
+      if (!result) return res.status(401).send('Password not valid!');
+      var token = utils.generateToken(data); // get basic user details
+
+      var userObj = utils.getCleanUser(data); // return the token along with user details
+
+      return res.json({
+        user: userObj,
+        access_token: token
+      });
+    }
+
+    user.password = bcrypt.hashSync(req.body.password); // User not found. Save new User in the database
+
+    User.create(user).then(function (data) {
+      var token = utils.generateToken(data); // get basic user details
+
+      var userObj = utils.getCleanUser(data); // return the token along with user details
+
+      return res.json({
+        user: userObj,
+        access_token: token
+      });
+    })["catch"](function (err) {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the User."
+      });
+    });
+  })["catch"](function (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while retrieving this user."
+    });
+  });
+}; // Retrieve all Users from the database.
+
+
+exports.findAll = function (req, res) {
+  User.findAll().then(function (data) {
+    res.send(data);
+  })["catch"](function (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while retrieving users."
+    });
+  });
+}; // Find a single User with an id
+
+
+exports.findOne = function (req, res) {
+  var id = req.params.id;
+  User.findByPk(id).then(function (data) {
+    res.send(data);
+  })["catch"](function (err) {
+    res.status(500).send({
+      message: "Error retrieving User with id=" + id
+    });
+  });
+}; // Update a User by the id in the request
+
+
+exports.update = function (req, res) {
+  var id = req.params.id;
+  User.update(req.body, {
+    where: {
+      id: id
+    }
+  }).then(function (num) {
+    if (num == 1) {
+      res.send({
+        message: "User was updated successfully."
+      });
+    } else {
+      res.send({
+        message: "Cannot update User with id=".concat(id, ". Maybe User was not found or req.body is empty!")
+      });
+    }
+  })["catch"](function (err) {
+    res.status(500).send({
+      message: "Error updating User with id=" + id
+    });
+  });
+}; // Delete a User with the specified id in the request
+
+/* // exports.delete = (req, res) => {
+//   const id = req.params.id;
+
+//   User.destroy({
+//     where: { id: id }
+//   })
+//     .then(num => {
+//       if (num == 1) {
+//         res.send({
+//           message: "User was deleted successfully!"
+//         });
+//       } else {
+//         res.send({
+//           message: `Cannot delete User with id=${id}. Maybe User was not found!`
+//         });
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message: "Could not delete User with id=" + id
+//       });
+//     });
+// };
+
+// // Delete all Users from the database.
+// exports.deleteAll = (req, res) => {
+//   User.destroy({
+//     where: {},
+//     truncate: false
+//   })
+//     .then(nums => {
+//       res.send({ message: `${nums} Tutorials were deleted successfully!` });
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while removing all tutorials."
+//       });
+//     });
+// };*/
+// Find user by username and password
+
+
+exports.findUserByUsernameAndPassword = function (req, res) {
+  var user = req.body.username;
+  var pwd = req.body.password;
+  User.findOne({
+    where: {
+      username: user,
+      password: pwd
+    }
+  }).then(function (data) {
+    res.send(data);
+  })["catch"](function (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while retrieving this username and password combination."
+    });
+  });
+};

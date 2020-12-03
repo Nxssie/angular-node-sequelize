@@ -14,7 +14,6 @@ var AddTaskComponent = /** @class */ (function () {
         this.fb = fb;
         this.router = router;
         this.taskService = taskService;
-        this.description = '';
         this.currentDate = new Date();
         this.currentUser = "User";
         this.addForm = this.fb.group({
@@ -32,14 +31,16 @@ var AddTaskComponent = /** @class */ (function () {
             console.log(taskData);
         }
         else {
-            var task = {
+            var task_1 = {
+                id: null,
                 title: this.addForm.value.title,
                 description: this.addForm.value.description,
                 done: this.addForm.value.done,
                 userId: this.addForm.value.userId
             };
-            this.taskService.addTask(task).subscribe(function (c) {
+            this.taskService.addTask(task_1).subscribe(function (c) {
                 _this.taskService.getAll();
+                console.log(task_1.done);
                 _this.router.navigateByUrl("/mytasks");
             });
         }

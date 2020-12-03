@@ -23,8 +23,31 @@ var TaskService = /** @class */ (function () {
     TaskService.prototype.getAll = function () {
         return this.http.get(apiUrl);
     };
-    TaskService.prototype.getCarsByUserId = function (id) {
-        return this.http.get(apiUrl + "/tasks/" + id);
+    TaskService.prototype.getTaskByUserId = function (id) {
+        return this.http.get(apiUrl + "/user/" + id);
+    };
+    TaskService.prototype.addTask = function (task) {
+        var bodyEncoded = new URLSearchParams();
+        bodyEncoded.append("title", task.title);
+        bodyEncoded.append("description", task.description);
+        bodyEncoded.append("done", task.done.toString());
+        bodyEncoded.append("userId", task.userId.toString());
+        var body = bodyEncoded.toString();
+        return this.http.post(apiUrl + "/", body, httpOptions);
+    };
+    TaskService.prototype.getTaskById = function (id) {
+        return this.http.get(apiUrl + "/" + id);
+    };
+    TaskService.prototype.updateTask = function (task, id) {
+        var bodyEncoded = new URLSearchParams();
+        bodyEncoded.append("title", task.title);
+        bodyEncoded.append("description", task.description);
+        var body = bodyEncoded.toString();
+        return this.http.put(apiUrl + "/" + id, body, httpOptions);
+    };
+    TaskService.prototype.deleteTask = function (id) {
+        console.log(apiUrl + "/" + id);
+        return this.http["delete"](apiUrl + "/" + id);
     };
     TaskService = __decorate([
         core_1.Injectable({

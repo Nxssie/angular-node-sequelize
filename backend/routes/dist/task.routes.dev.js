@@ -3,14 +3,16 @@
 module.exports = function (app) {
   var tasks = require("../controllers/task.controller");
 
+  var auth = require("../controllers/auth");
+
   var router = require("express").Router(); // Create a new Task
 
 
   router.post("/", tasks.create); // Retrieve all Task
 
-  router.get("/", tasks.findAll); // Retrieve all Task
+  router.get("/", tasks.findAll); // Retrieve all Task by user ID
 
-  router.get("/tasks/:id", tasks.findAllByUserId); // Retrieve a single Task with id
+  router.get("/user/:id", auth.isAuthenticatedActualUser, tasks.findAllByUserId); // Retrieve a single Task with id
 
   router.get("/:id", tasks.findOne); // // Update a Task with id
 

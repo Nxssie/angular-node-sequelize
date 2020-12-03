@@ -47,23 +47,22 @@ var core_1 = require("@angular/core");
 var operators_1 = require("rxjs/operators");
 var rxjs_1 = require("rxjs");
 var AuthService = /** @class */ (function () {
-    function AuthService(httpClient, storage) {
+    function AuthService(httpClient) {
         this.httpClient = httpClient;
-        this.storage = storage;
-        this.AUTH_SERVER_ADDRESS = 'http://localhost:3000';
+        this.AUTH_SERVER_ADDRESS = 'http://localhost:4000';
         this.authSubject = new rxjs_1.BehaviorSubject(false);
     }
     AuthService.prototype.register = function (user) {
         var _this = this;
-        return this.httpClient.post(this.AUTH_SERVER_ADDRESS + "/register", user).pipe(operators_1.tap(function (res) { return __awaiter(_this, void 0, void 0, function () {
+        return this.httpClient.post(this.AUTH_SERVER_ADDRESS + "/api/users", user).pipe(operators_1.tap(function (res) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!res.user) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.storage.set("ACCESS_TOKEN", res.user.access_token)];
+                        return [4 /*yield*/, localStorage.setItem("ACCESS_TOKEN", res.user.access_token)];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, this.storage.set("EXPIRES_IN", res.user.expires_in)];
+                        return [4 /*yield*/, localStorage.setItem("EXPIRES_IN", res.user.expires_in)];
                     case 2:
                         _a.sent();
                         this.authSubject.next(true);
@@ -72,6 +71,45 @@ var AuthService = /** @class */ (function () {
                 }
             });
         }); }));
+    };
+    AuthService.prototype.login = function (user) {
+        var _this = this;
+        return this.httpClient.post(this.AUTH_SERVER_ADDRESS + "/api/users/signin", user).pipe(operators_1.tap(function (res) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!res.user) return [3 /*break*/, 3];
+                        return [4 /*yield*/, localStorage.setItem("ACCESS_TOKEN", res.user.access_token)];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, localStorage.setItem("EXPIRES_IN", res.user.expires_in)];
+                    case 2:
+                        _a.sent();
+                        this.authSubject.next(true);
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); }));
+    };
+    AuthService.prototype.logout = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, localStorage.remove("ACCESS_TOKEN")];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, localStorage.remove("EXPIRES_IN")];
+                    case 2:
+                        _a.sent();
+                        this.authSubject.next(false);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    AuthService.prototype.isLoggedIn = function () {
+        return this.authSubject.asObservable();
     };
     AuthService = __decorate([
         core_1.Injectable({

@@ -15,14 +15,20 @@ var profile_component_1 = require("./components/profile/profile.component");
 var settings_component_1 = require("./components/settings/settings.component");
 var tasks_component_1 = require("./components/tasks/tasks.component");
 var add_task_component_1 = require("./components/tasks/add-task/add-task.component");
+var login_component_1 = require("./components/user/login/login.component");
+var register_component_1 = require("./components/user/register/register.component");
+var edit_tasks_component_1 = require("./components/tasks/edit-tasks/edit-tasks.component");
 var routes = [
     { path: 'home', component: home_component_1.HomeComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'profile', component: profile_component_1.ProfileComponent },
     { path: 'mytasks', component: tasks_component_1.TasksComponent },
     { path: 'settings', component: settings_component_1.SettingsComponent },
     { path: 'about', component: about_component_1.AboutComponent },
-    { path: 'add-task', component: add_task_component_1.AddTaskComponent }
+    { path: 'add-task', component: add_task_component_1.AddTaskComponent },
+    { path: 'edit-task', component: edit_tasks_component_1.EditTasksComponent },
+    { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'register', component: register_component_1.RegisterComponent }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

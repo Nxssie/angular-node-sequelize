@@ -1,8 +1,9 @@
 export class Task {
 
+    id!: any | number;
     title!: string;
     description!: string;
-    done!: string;
+    done!: boolean;
     userId!: number;
 
 }

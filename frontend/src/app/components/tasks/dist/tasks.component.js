@@ -9,15 +9,15 @@ exports.__esModule = true;
 exports.TasksComponent = void 0;
 var core_1 = require("@angular/core");
 var TasksComponent = /** @class */ (function () {
-    function TasksComponent(taskService) {
+    function TasksComponent(taskService, router) {
         this.taskService = taskService;
+        this.router = router;
     }
     TasksComponent.prototype.ngOnInit = function () {
         this.getAll();
         console.log("init");
     };
     TasksComponent.prototype.ngAfterViewInit = function () {
-        this.getAll();
         console.log("after");
     };
     TasksComponent.prototype.getAll = function () {
@@ -25,6 +25,51 @@ var TasksComponent = /** @class */ (function () {
         this.taskService.getAll().subscribe(function (tasks) {
             _this.tasks = tasks;
         });
+    };
+    TasksComponent.prototype.editTask = function (id) {
+        if (id == null) {
+            console.warn("This task doesn't exists");
+        }
+        else {
+            localStorage.setItem("ACTUAL_TASK", id.toString());
+            console.log(localStorage.getItem("ACTUAL_TASK"));
+        }
+    };
+    TasksComponent.prototype.deleteTask = function (id) {
+        var _this = this;
+        if (id == null) {
+            console.log("This task doesn't exists");
+        }
+        else {
+            this.taskService.deleteTask(id).subscribe(function () {
+                _this.getAll();
+            });
+        }
+    };
+    TasksComponent.prototype.changeDone = function (id) {
+        var _this = this;
+        if (id == null) {
+            console.log("This task doesn't exists");
+        }
+        else {
+            this.taskService.getTaskById(id).subscribe(function (task) {
+                console.log("Previous status: " + task.done);
+                _this.task = task;
+                // Update status depending on the previous one
+                if (task.done) {
+                    _this.task.done = false;
+                    console.log("Next status: " + task.done);
+                }
+                else {
+                    _this.task.done = true;
+                    console.log("Next status: " + task.done);
+                }
+                _this.taskService.updateTask(_this.task, id).subscribe(function () {
+                    _this.taskService.getAll();
+                    _this.router.navigateByUrl("/mytasks");
+                });
+            });
+        }
     };
     TasksComponent = __decorate([
         core_1.Component({

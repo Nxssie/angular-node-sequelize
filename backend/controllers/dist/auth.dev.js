@@ -1,10 +1,10 @@
 "use strict";
 
-var jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
 
-var utils = require('../utils');
+var utils = require("../utils");
 
-var bcrypt = require('bcryptjs');
+var bcrypt = require("bcryptjs");
 
 var db = require("../models");
 
@@ -28,7 +28,7 @@ exports.signin = function (req, res) {
     }
   }).then(function (data) {
     var result = bcrypt.compareSync(pwd, data.password);
-    if (!result) return res.status(401).send('Password not valid!'); // generate token
+    if (!result) return res.status(401).send("Password not valid!"); // generate token
 
     var token = utils.generateToken(data); // get basic user details
 
@@ -80,5 +80,67 @@ exports.isAuthenticated = function (req, res, next) {
         message: "Error retrieving User with id=" + id
       });
     });
+  });
+};
+
+exports.isAuthenticatedActualUser = function (req, res, next) {
+  // check header or url parameters or post parameters for token
+  // var token = req.body.token || req.query.token;
+  var id = req.params.id;
+  var token = req.body.token;
+
+  if (!token) {
+    return res.status(400).json({
+      error: true,
+      message: "Token is required."
+    });
+  } // check token that was passed by decoding token using secret
+  // .env should contain a line like JWT_SECRET=V3RY#1MP0RT@NT$3CR3T#
+
+
+  decoded = jwt.verify(token, process.env.JWT_SECRET, function (err) {
+    if (err) return res.status(401).json({
+      error: true,
+      message: "Invalid token."
+    });
+
+    if (req.headers && req.headers.authorization) {
+      var authorization = req.headers.authorization.split(" ")[1],
+          decoded;
+
+      try {
+        decoded = jwt.verify(authorization, process.env.JWT_SECRET);
+      } catch (e) {
+        return res.status(401).send("unauthorized");
+      }
+
+      var userId = decoded.id; // Fetch the user by id
+
+      User.findOne({
+        id: userId
+      }).then(function (user) {
+        // Do something with the user
+        return res.send(200);
+      });
+    }
+
+    return res.send(500);
+    /*User.findByPk(user.id)
+      .then((data) => {
+        // return 401 status if the userId does not match.
+        if (!user.id) {
+          return res.status(401).json({
+            error: true,
+            message: "Invalid user.",
+          });
+        }
+        // get basic user details
+        next();
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error retrieving User with id=" + id,
+        });
+      });*/
   });
 };

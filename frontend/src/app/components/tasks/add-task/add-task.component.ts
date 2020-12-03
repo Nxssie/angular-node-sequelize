@@ -14,7 +14,7 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./add-task.component.sass'],
 })
 export class AddTaskComponent implements OnInit {
-  description: string = '';
+  description!: string;
 
   addForm: FormGroup;
 
@@ -43,6 +43,7 @@ export class AddTaskComponent implements OnInit {
       console.log(taskData);
     } else {
       let task = {
+        id: null,
         title: this.addForm.value.title,
         description: this.addForm.value.description,
         done: this.addForm.value.done,
@@ -50,6 +51,7 @@ export class AddTaskComponent implements OnInit {
       }
       this.taskService.addTask(task).subscribe((c) => {
         this.taskService.getAll();
+        console.log(task.done);
         this.router.navigateByUrl("/mytasks");
       })
     }

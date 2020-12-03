@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddTaskComponent } from './components/tasks/add-task/add-task.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { EditTasksComponent } from './components/tasks/edit-tasks/edit-tasks.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RegisterComponent } from './components/user/register/register.component
     SettingsComponent,
     AddTaskComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditTasksComponent
   ],
   imports: [
     AuthModule,

@@ -14,8 +14,11 @@ var RegisterComponent = /** @class */ (function () {
         this.fb = fb;
         this.router = router;
         this.authService = authService;
+        // requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces
         this.passwordPattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$";
-        this.namePattern = "^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$";
+        /*  Person's name (first, last, or both) in any letter case. Although not perfect, this expression
+            will filter out many incorrect name formats (especially numerics and invalid special characters).*/
+        this.namePattern = '^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$';
         this.registerForm = this.fb.group({
             username: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5), forms_1.Validators.maxLength(20)]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.pattern(this.passwordPattern)]],
@@ -23,6 +26,25 @@ var RegisterComponent = /** @class */ (function () {
         });
     }
     RegisterComponent.prototype.ngOnInit = function () {
+    };
+    RegisterComponent.prototype.onSubmit = function (userData) {
+        var _this = this;
+        if (!this.registerForm.valid) {
+            console.warn('Please provide all the required values!');
+            console.log(userData);
+        }
+        else {
+            var user = {
+                id: 0,
+                username: this.registerForm.value.username,
+                password: this.registerForm.value.password,
+                name: this.registerForm.value.name,
+                isAdmin: false
+            };
+            this.authService.register(user).subscribe(function (u) {
+                _this.router.navigateByUrl("/login");
+            });
+        }
     };
     RegisterComponent = __decorate([
         core_1.Component({

@@ -9,15 +9,17 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { AddTaskComponent} from './components/tasks/add-task/add-task.component'
 import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { EditTasksComponent } from './components/tasks/edit-tasks/edit-tasks.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'profile', component: ProfileComponent},
   { path: 'mytasks', component: TasksComponent},
   { path: 'settings', component: SettingsComponent},
   { path: 'about', component: AboutComponent},
   { path: 'add-task', component: AddTaskComponent },
+  { path: 'edit-task', component: EditTasksComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
 ];
