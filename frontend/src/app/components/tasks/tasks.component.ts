@@ -26,14 +26,13 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
-    console.log("init")
   }
 
   ngAfterViewInit() {
-    console.log("after")
   }
 
   getAll() {
+    console.log("get all")
     this.taskService.getAll().subscribe(tasks => {
       this.tasks = tasks;
     })
@@ -69,15 +68,16 @@ export class TasksComponent implements OnInit {
         // Update status depending on the previous one
         if (task.done) {
           this.task.done = false;
-          console.log("Next status: " + task.done);
+          console.log("Next status: " + this.task.done);
         } else {
           this.task.done = true;
-          console.log("Next status: " + task.done);
+          console.log("Next status: " + this.task.done);
         }
 
         this.taskService.updateTask(this.task, id).subscribe(()=> {
-          this.taskService.getAll();
-          this.router.navigateByUrl("/mytasks");
+          console.log("Updating...->");
+          console.log(this.task);
+          this.getAll();
         })
       });
       

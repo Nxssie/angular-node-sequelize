@@ -15,13 +15,12 @@ var TasksComponent = /** @class */ (function () {
     }
     TasksComponent.prototype.ngOnInit = function () {
         this.getAll();
-        console.log("init");
     };
     TasksComponent.prototype.ngAfterViewInit = function () {
-        console.log("after");
     };
     TasksComponent.prototype.getAll = function () {
         var _this = this;
+        console.log("get all");
         this.taskService.getAll().subscribe(function (tasks) {
             _this.tasks = tasks;
         });
@@ -58,15 +57,16 @@ var TasksComponent = /** @class */ (function () {
                 // Update status depending on the previous one
                 if (task.done) {
                     _this.task.done = false;
-                    console.log("Next status: " + task.done);
+                    console.log("Next status: " + _this.task.done);
                 }
                 else {
                     _this.task.done = true;
-                    console.log("Next status: " + task.done);
+                    console.log("Next status: " + _this.task.done);
                 }
                 _this.taskService.updateTask(_this.task, id).subscribe(function () {
-                    _this.taskService.getAll();
-                    _this.router.navigateByUrl("/mytasks");
+                    console.log("Updating...->");
+                    console.log(_this.task);
+                    _this.getAll();
                 });
             });
         }
