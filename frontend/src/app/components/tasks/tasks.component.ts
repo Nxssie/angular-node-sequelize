@@ -26,13 +26,13 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.getCurrentUser();
   }
 
   ngAfterViewInit() {
   }
 
   getAll() {
-    console.log("get all")
     this.taskService.getAll().subscribe(tasks => {
       this.tasks = tasks;
     })
@@ -62,26 +62,26 @@ export class TasksComponent implements OnInit {
       console.log("This task doesn't exists");
     } else {
       this.taskService.getTaskById(id).subscribe((task) => {
-        console.log("Previous status: " + task.done);
         this.task = task;
 
         // Update status depending on the previous one
         if (task.done) {
           this.task.done = false;
-          console.log("Next status: " + this.task.done);
         } else {
           this.task.done = true;
-          console.log("Next status: " + this.task.done);
         }
 
-        this.taskService.updateTask(this.task, id).subscribe(()=> {
-          console.log("Updating...->");
-          console.log(this.task);
+        this.taskService.updateTask(this.task, id).subscribe((data)=> {
           this.getAll();
         })
       });
       
     }
+  }
+
+  getCurrentUser() {
+    console.log(localStorage.getItem("ACTUAL_USER_ID"));
+    console.log("Token:" + localStorage.getItem("ACCESS_TOKEN"));
   }
 
 }

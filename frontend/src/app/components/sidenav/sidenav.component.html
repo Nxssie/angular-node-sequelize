@@ -19,6 +19,9 @@
       <button mat-list-item class="nav-button" routerLink="/about" (click)="sidenav.close()"> 
           <mat-icon class="nav-icon">info </mat-icon> <span>About</span>
       </button>
+      <button mat-list-item class="nav-button" (click)="logout(); sidenav.close()"> 
+        <mat-icon class="nav-icon">user </mat-icon> <span>Logout</span>
+    </button>
     </mat-action-list>
     <div class="container" id="copyright-disc">
       <a href="https://github.com/Nxssie/angular-node-sequelize" id="copyright-link">Nxssie 2020</a>

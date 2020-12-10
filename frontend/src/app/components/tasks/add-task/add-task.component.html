@@ -12,13 +12,13 @@
           <mat-card-content class="container">
             <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
               <div class="row">
-                <div class="col-6">
+                <div class="col">
                   <mat-form-field appearance="standard">
                     <mat-label>Title:</mat-label>
                     <input matInput formControlName="title" />
                   </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col">
                   <mat-checkbox id="done-checkbox" formControlName="done">Done?</mat-checkbox>
                 </div>
               </div>
@@ -27,13 +27,6 @@
                   <mat-form-field appearance="standard">
                     <mat-label>Description:</mat-label>
                     <textarea matInput formControlName="description"></textarea>
-                  </mat-form-field>
-                </div>
-
-                <div class="col-6">
-                  <mat-form-field appearance="standard">
-                    <mat-label>User ID:</mat-label>
-                    <input matInput formControlName="userId" />
                   </mat-form-field>
                 </div>
               </div>
@@ -48,7 +41,7 @@
                 <mat-icon>check</mat-icon> Confirm
               </button>
 
-              <button
+              <button (click)="onCancel()"
                 mat-raised-button
                 color="primary"
                 id="cancel-button"
@@ -71,7 +64,7 @@
             <mat-card-subtitle></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="container">
-            <p>Username: {{ currentUser }}</p>
+            <p id="username-field">Username: </p>
             <p>Date: {{currentDate | date:'yyyy-MM-dd'}}</p>
             <p *ngIf="addForm.value.done; else undone">Status: done</p>
             <ng-template #undone>

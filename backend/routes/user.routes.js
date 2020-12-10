@@ -11,7 +11,7 @@ module.exports = app => {
   router.get("/", auth.isAuthenticated, users.findAll);
   
   // Retrieve a single User with id
-  router.get("/:id", auth.isAuthenticated, users.findOne);
+  router.get("/:id", auth.isAuthenticatedActualUser, users.findOne);
 
   // Update a User with id
   router.put("/:id", auth.isAuthenticated, users.update);

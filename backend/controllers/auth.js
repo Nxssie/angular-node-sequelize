@@ -41,7 +41,7 @@ exports.signin = (req, res) => {
 exports.isAuthenticated = (req, res, next) => {
   // check header or url parameters or post parameters for token
   // var token = req.body.token || req.query.token;
-  var token = req.body.token;
+  var token = req.token;
   if (!token) {
     return res.status(400).json({
       error: true,
@@ -81,7 +81,7 @@ exports.isAuthenticatedActualUser = (req, res, next) => {
   // check header or url parameters or post parameters for token
   // var token = req.body.token || req.query.token;
   var id = req.params.id;
-  var token = req.body.token;
+  var token = req.token;
   if (!token) {
     return res.status(400).json({
       error: true,
@@ -90,46 +90,39 @@ exports.isAuthenticatedActualUser = (req, res, next) => {
   }
   // check token that was passed by decoding token using secret
   // .env should contain a line like JWT_SECRET=V3RY#1MP0RT@NT$3CR3T#
-  decoded = jwt.verify(token, process.env.JWT_SECRET, function (err) {
+  jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
     if (err)
       return res.status(401).json({
         error: true,
         message: "Invalid token.",
       });
 
-    if (req.headers && req.headers.authorization) {
-      var authorization = req.headers.authorization.split(" ")[1], decoded;
-      try {
-        decoded = jwt.verify(authorization, process.env.JWT_SECRET);
-      } catch (e) {
-        return res.status(401).send("unauthorized");
-      }
-
-      var userId = decoded.id;
-      // Fetch the user by id
-      User.findOne({ id: userId }).then(function (user) {
-        // Do something with the user
-        return res.send(200);
-      });
-    }
-    return res.send(500);
-
-    /*User.findByPk(user.id)
+    User.findByPk(user.id)
       .then((data) => {
+        console.log("Data: " + data);
         // return 401 status if the userId does not match.
-        if (!user.id) {
+        if (!data.id) {
           return res.status(401).json({
             error: true,
             message: "Invalid user.",
           });
         }
         // get basic user details
-        next();
+        if(user.id == id) {
+          console.log("Next");
+          next();
+        } else {
+          return res.status(401).json({
+            error: true,
+            message: "User without permission.",
+          });
+        }
+        
       })
       .catch((err) => {
         res.status(500).send({
           message: "Error retrieving User with id=" + id,
         });
-      });*/
+      });
   });
 };

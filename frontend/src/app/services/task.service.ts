@@ -36,7 +36,7 @@ export class TaskService {
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("title", task.title);
     bodyEncoded.append("description", task.description);
-    bodyEncoded.append("done", task.done.toString());
+    bodyEncoded.append("done", task.done ? "true" : "false");
     bodyEncoded.append("userId", task.userId.toString());
     let body = bodyEncoded.toString();
 
@@ -51,6 +51,7 @@ export class TaskService {
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("title", task.title);
     bodyEncoded.append("description", task.description);
+    bodyEncoded.append("done", task.done ? "true" : "false");
     let body = bodyEncoded.toString();
 
     return this.http.put(apiUrl + "/" + id, body, httpOptions);
