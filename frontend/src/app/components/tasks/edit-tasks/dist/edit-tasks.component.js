@@ -10,22 +10,23 @@ exports.EditTasksComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var EditTasksComponent = /** @class */ (function () {
-    function EditTasksComponent(taskService, router, fb) {
+    function EditTasksComponent(taskService, userService, router, fb) {
         this.taskService = taskService;
+        this.userService = userService;
         this.router = router;
         this.fb = fb;
         this.taskID = +localStorage.getItem("ACTUAL_TASK");
         this.editForm = this.fb.group({
             title: ['', [forms_1.Validators.required, forms_1.Validators.maxLength(20)]],
             description: ['', [forms_1.Validators.required]],
-            done: [false]
+            done: [false],
+            userId: ['']
         });
     }
     EditTasksComponent.prototype.ngOnInit = function () {
-        console.log("hello, world");
+        this.getCurrentUser();
         if (this.taskID == null) {
             console.warn("Null task id");
-            this.taskID = 1;
         }
         else {
             this.getData(this.taskID);
@@ -54,13 +55,19 @@ var EditTasksComponent = /** @class */ (function () {
                 title: this.editForm.value.title,
                 description: this.editForm.value.description,
                 done: this.editForm.value.done,
-                userId: 1
+                userId: this.editForm.value.userId || this.user.id
             };
             this.taskService.updateTask(task, this.task.id).subscribe(function (c) {
-                _this.taskService.getAll();
                 _this.router.navigateByUrl("/mytasks");
             });
         }
+    };
+    EditTasksComponent.prototype.getCurrentUser = function () {
+        var _this = this;
+        var userId = +localStorage.getItem("ACTUAL_USER_ID");
+        this.userService.getUserById(userId).subscribe(function (user) {
+            _this.user = user;
+        });
     };
     EditTasksComponent = __decorate([
         core_1.Component({

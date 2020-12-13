@@ -65,7 +65,6 @@ export class EditTasksComponent implements OnInit {
         userId: this.editForm.value.userId || this.user.id
       }
       this.taskService.updateTask(task, this.task.id).subscribe((c) => {
-        this.taskService.getAll();
         this.router.navigateByUrl("/mytasks");
       })
     }

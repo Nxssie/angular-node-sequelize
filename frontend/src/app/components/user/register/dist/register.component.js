@@ -69,9 +69,11 @@ var RegisterComponent = /** @class */ (function () {
             var user = {
                 id: 0,
                 username: this.registerForm.value.username,
-                password: this.registerForm.value.password,
                 name: this.registerForm.value.name,
-                isAdmin: false
+                password: this.registerForm.value.password,
+                isAdmin: false,
+                createdAt: new Date(),
+                updatedAt: new Date()
             };
             this.authService.register(user).subscribe(function (u) {
                 console.log(u);

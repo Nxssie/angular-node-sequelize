@@ -67,13 +67,16 @@ export class RegisterComponent implements OnInit {
       console.log(userData)
     } else {
 
-      let user = {
+      let user: User = {
         id: 0,
         username: this.registerForm.value.username,
-        password: this.registerForm.value.password,
         name: this.registerForm.value.name,
-        isAdmin: false
+        password: this.registerForm.value.password,
+        isAdmin: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
+
       this.authService.register(user).subscribe((u) => {
         console.log(u);
         //this.router.navigateByUrl("/login");
