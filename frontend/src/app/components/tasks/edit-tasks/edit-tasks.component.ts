@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
+import { User } from 'src/app/models/user.model';
 import { TaskService } from 'src/app/services/task.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-edit-tasks',
@@ -12,26 +14,28 @@ import { TaskService } from 'src/app/services/task.service';
 export class EditTasksComponent implements OnInit {
   task!: Task;
   taskID: number = +localStorage.getItem("ACTUAL_TASK")!;
+  user!: User;
 
   editForm: FormGroup;
 
   constructor(
     private taskService: TaskService,
+    private userService: UserService,
     private router: Router,
     public fb: FormBuilder
   ) {
     this.editForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(20)]],
       description: ['', [Validators.required]],
-      done: [false]
+      done: [false],
+      userId: ['']
     });
   }
 
   ngOnInit(): void {
-    console.log("hello, world");
+    this.getCurrentUser();
     if(this.taskID == null) {
       console.warn("Null task id");
-      this.taskID = 1;
     } else {
       this.getData(this.taskID);
     }
@@ -58,12 +62,19 @@ export class EditTasksComponent implements OnInit {
         title: this.editForm.value.title,
         description: this.editForm.value.description,
         done: this.editForm.value.done,
-        userId: 1
+        userId: this.editForm.value.userId || this.user.id
       }
       this.taskService.updateTask(task, this.task.id).subscribe((c) => {
         this.taskService.getAll();
         this.router.navigateByUrl("/mytasks");
       })
     }
+  }
+
+  getCurrentUser() {
+    let userId = +localStorage.getItem("ACTUAL_USER_ID")!;
+    this.userService.getUserById(userId).subscribe((user) => {
+      this.user = user;
+    })
   }
 }

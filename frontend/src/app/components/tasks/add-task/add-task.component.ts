@@ -6,6 +6,7 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { TaskService } from 'src/app/services/task.service';
@@ -29,7 +30,8 @@ export class AddTaskComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private taskService: TaskService,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar
   ) {
     this.addForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(20)]],
@@ -48,12 +50,9 @@ export class AddTaskComponent implements OnInit {
 
   getCurrentUser() {
     let id =  <number><unknown>localStorage.getItem("ACTUAL_USER_ID");
-    console.log(id);
     this.userService.getUserById(id).subscribe((user) => {
-      console.log(user);
       this.currentUser = user;
     });
-    console.log(this.currentUser);
   }
 
   onSubmit(taskData: any) {
@@ -70,9 +69,10 @@ export class AddTaskComponent implements OnInit {
         userId: this.currentUser.id
       }
       this.taskService.addTask(task).subscribe((c) => {
-        this.taskService.getAll();
-        console.log(task.done);
-        this.router.navigateByUrl("/mytasks");
+        this.snackBar.open("Task added successfully", "Okay", {
+          duration: 2000,
+        });
+        //this.router.navigateByUrl("/mytasks");
       })
     }
   }

@@ -8,13 +8,13 @@ module.exports = app => {
   router.post("/", users.create);
 
   // Retrieve all User
-  router.get("/", auth.isAuthenticated, users.findAll);
+  router.get("/", users.findAll);
   
   // Retrieve a single User with id
-  router.get("/:id", auth.isAuthenticatedActualUser, users.findOne);
+  router.get("/:id", users.findOne);
 
   // Update a User with id
-  router.put("/:id", auth.isAuthenticated, users.update);
+  router.put("/:id", users.update);
 
   // Sign in
   router.post("/signin", auth.signin);

@@ -64,7 +64,7 @@
             <mat-card-subtitle></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="container">
-            <p id="username-field">Username: </p>
+            <p>Username: {{currentUser.username}}</p>
             <p>Date: {{currentDate | date:'yyyy-MM-dd'}}</p>
             <p *ngIf="addForm.value.done; else undone">Status: done</p>
             <ng-template #undone>

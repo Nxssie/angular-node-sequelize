@@ -81,6 +81,7 @@ exports.isAuthenticatedActualUser = (req, res, next) => {
   // check header or url parameters or post parameters for token
   // var token = req.body.token || req.query.token;
   var id = req.params.id;
+  console.log(req.token);
   var token = req.token;
   if (!token) {
     return res.status(400).json({

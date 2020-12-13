@@ -9,7 +9,7 @@ module.exports = app => {
   router.post("/", tasks.create);
 
   // Retrieve all Task
-  router.get("/", tasks.findAll);
+  router.get("/", auth.isAuthenticated, tasks.findAll);
 
   // Retrieve all Task by user ID
   router.get("/user/:id", auth.isAuthenticatedActualUser, tasks.findAllByUserId);

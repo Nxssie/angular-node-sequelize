@@ -21,6 +21,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AboutComponent } from './components/about/about.component';
@@ -32,6 +34,7 @@ import { AddTaskComponent } from './components/tasks/add-task/add-task.component
 import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { EditTasksComponent } from './components/tasks/edit-tasks/edit-tasks.component';
+import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { EditTasksComponent } from './components/tasks/edit-tasks/edit-tasks.com
     AddTaskComponent,
     LoginComponent,
     RegisterComponent,
-    EditTasksComponent
+    EditTasksComponent,
+    EditUserComponent,
   ],
   imports: [
     AuthModule,
@@ -65,8 +69,10 @@ import { EditTasksComponent } from './components/tasks/edit-tasks/edit-tasks.com
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSnackBarModule,
     MatCardModule,
     MatFormFieldModule,
+    MatSlideToggleModule,
     HttpClientModule
   ],
   providers: [],

@@ -10,6 +10,7 @@ import { AddTaskComponent} from './components/tasks/add-task/add-task.component'
 import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { EditTasksComponent } from './components/tasks/edit-tasks/edit-tasks.component';
+import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'add-task', component: AddTaskComponent },
   { path: 'edit-task', component: EditTasksComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'edit-user', component: EditUserComponent}
 ];
 
 @NgModule({

@@ -1,7 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Task } from 'src/app/models/task.model'
-import { TaskService } from '../../services/task.service'
+import { Observable, Subscription } from 'rxjs';
+import { Task } from 'src/app/models/task.model';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user/user.service';
+import { TaskService } from '../../services/task.service';
 
 export interface DialogData {
   animal: string;
@@ -11,39 +14,45 @@ export interface DialogData {
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.sass']
+  styleUrls: ['./tasks.component.sass'],
 })
-export class TasksComponent implements OnInit {
-
+export class TasksComponent implements OnInit, AfterViewInit {
   task!: Task;
   tasks!: Task[];
   title!: string;
   description!: Text;
   done!: boolean;
+  user!: User;
 
+  constructor(
+    private taskService: TaskService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
-  constructor(private taskService: TaskService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.getAll();
-    this.getCurrentUser();
+  ngOnInit() {
+    this.getUserAndTasks();
   }
 
-  ngAfterViewInit() {
-  }
+  async ngAfterViewInit() {}
 
   getAll() {
-    this.taskService.getAll().subscribe(tasks => {
+    this.taskService.getAll().subscribe((tasks) => {
       this.tasks = tasks;
-    })
+    });
+  }
+
+  getAllOfCurrentUser() {
+    this.taskService.getTaskByUserId(this.user.id).subscribe((tasks) => {
+      this.tasks = tasks;
+    });
   }
 
   editTask(id: number) {
     if (id == null) {
       console.warn("This task doesn't exists");
     } else {
-      localStorage.setItem("ACTUAL_TASK", id.toString());
-      console.log(localStorage.getItem("ACTUAL_TASK"));
+      localStorage.setItem('ACTUAL_TASK', id.toString());
     }
   }
 
@@ -51,8 +60,8 @@ export class TasksComponent implements OnInit {
     if (id == null) {
       console.log("This task doesn't exists");
     } else {
-      this.taskService.deleteTask(id).subscribe(()=> {
-        this.getAll();
+      this.taskService.deleteTask(id).subscribe(() => {
+        this.getAllOfCurrentUser();
       });
     }
   }
@@ -71,17 +80,23 @@ export class TasksComponent implements OnInit {
           this.task.done = true;
         }
 
-        this.taskService.updateTask(this.task, id).subscribe((data)=> {
-          this.getAll();
-        })
+        this.taskService.updateTask(this.task, id).subscribe((data) => {
+          this.getAllOfCurrentUser();
+        });
       });
-      
     }
   }
 
-  getCurrentUser() {
-    console.log(localStorage.getItem("ACTUAL_USER_ID"));
-    console.log("Token:" + localStorage.getItem("ACCESS_TOKEN"));
+  getUserAndTasks() {
+    const userId = +localStorage.getItem("ACTUAL_USER_ID")!;
+    this.userService.getUserById(userId).subscribe((user) => {
+      this.user = user;
+      if(user.isAdmin) {
+        this.getAll();
+      } else {
+        this.getAllOfCurrentUser();
+      }
+    })
   }
 
 }
