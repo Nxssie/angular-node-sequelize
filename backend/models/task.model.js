@@ -8,9 +8,16 @@ module.exports = (sequelize, Sequelize) => {
     },
     done: {
       type: Sequelize.BOOLEAN
-    }
-    
+    }    
   });
+
+  Task.associate = function(models) {
+    Task.belongsTo(models.user, {
+      onDelete: "CASCADE",
+      foreignKey: "userId",
+      as: "users",
+    })
+  }
 
   return Task;
 };

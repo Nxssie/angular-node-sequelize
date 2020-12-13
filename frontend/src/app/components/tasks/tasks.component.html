@@ -1,0 +1,38 @@
+<ng-container>
+  <div class="container mt-4">
+    <mat-card *ngFor="let t of tasks" class="mt-4">
+      <mat-card-header>
+        <mat-card-title>{{ t.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <mat-icon color="warn" *ngIf="t.done; else undone" id="task-done"
+            >done_all</mat-icon
+          >
+          <ng-template #undone>
+            <mat-icon id="task-undone">schedule</mat-icon>
+          </ng-template>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="container">{{ t.description }}</mat-card-content>
+      <mat-card-actions>
+        <button mat-button routerLink="/edit-task" (click)="editTask(t.id)">Edit</button>
+        <button mat-button (click)="deleteTask(t.id)">Remove</button>
+        <button mat-button (click)="changeDone(t.id)" *ngIf="t.done; else undonebutton">
+          Mark as undone
+        </button>
+        <ng-template #undonebutton>
+          <button mat-button (click)="changeDone(t.id)">Mark as done</button>
+        </ng-template>
+      </mat-card-actions>
+    </mat-card>    
+  </div>
+
+  <!-- Small devices button -->
+  <button mat-fab id="add-button" routerLink="/add-task"><mat-icon>add</mat-icon></button>
+
+  <!-- Bigger devices button (expanded) -->
+  <div id="extended-desktop-button">
+    <button class="extended-fab-button" mat-fab color="primary" routerLink="/add-task">
+      <span class="extended-fab-button__text">Add task</span>
+    </button>
+  </div>
+</ng-container>

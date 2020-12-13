@@ -1,0 +1,54 @@
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#toolbar-title {
+  margin-left: 2vw;
+  margin-top: 1vh;
+}
+
+.nav-icon {
+  margin-right: 1em;
+}
+
+#copyright-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#copyright-disc {
+  position: absolute;
+  top: 95;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#copyright-link {
+  font-size: 16px;
+}
+
+@media (min-width: 576px) {
+  mat-sidenav {
+    width: 60% !important;
+  }
+}
+@media (min-width: 768px) {
+  mat-sidenav {
+    width: 40% !important;
+  }
+}
+@media (min-width: 992px) {
+  mat-sidenav {
+    width: 30% !important;
+  }
+}
+@media (min-width: 1200px) {
+  mat-sidenav {
+    width: 30% !important;
+  }
+}

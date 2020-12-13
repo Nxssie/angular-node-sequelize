@@ -1,0 +1,19 @@
+form {
+  text-align: center;
+}
+
+.row {
+  align-content: center;
+}
+
+.full-width-field {
+  width: 100%;
+}
+
+#cancel-button {
+  background-color: #ef5350;
+}
+
+#register-button {
+  background-color: #66bb6a;
+}

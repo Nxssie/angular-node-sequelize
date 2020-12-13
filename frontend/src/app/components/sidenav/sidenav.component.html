@@ -1,0 +1,78 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" role="navigation">
+    <mat-toolbar color="primary">
+      <span> Welcome, user </span>
+    </mat-toolbar>
+    <mat-action-list>
+      <button
+        mat-list-item
+        class="nav-button"
+        routerLink="/home"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="nav-icon">home </mat-icon> <span>Home</span>
+      </button>
+      <button
+        mat-list-item
+        class="nav-button"
+        routerLink="/profile"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="nav-icon">person </mat-icon> <span>Profile</span>
+      </button>
+      <button
+        mat-list-item
+        class="nav-button"
+        routerLink="/mytasks"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="nav-icon">list </mat-icon> <span>My tasks</span>
+      </button>
+      <button
+        mat-list-item
+        class="nav-button"
+        routerLink="/settings"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="nav-icon">settings </mat-icon> <span>Settings</span>
+      </button>
+      <button
+        mat-list-item
+        class="nav-button"
+        routerLink="/about"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="nav-icon">info </mat-icon> <span>About</span>
+      </button>
+      <button
+        mat-list-item
+        class="nav-button"
+        (click)="logout(); sidenav.close()"
+      >
+        <mat-icon class="nav-icon">user </mat-icon> <span>Logout</span>
+      </button>
+    </mat-action-list>
+    
+    <div class="container" id="copyright-disc">
+      <a
+        href="https://github.com/Nxssie/angular-node-sequelize"
+        id="copyright-link"
+        >Nxssie 2020</a
+      >
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button
+        id="menu-button"
+        mat-mini-fab
+        color="primary"
+        (click)="sidenav.open()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <p id="toolbar-title">Task Manager</p>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

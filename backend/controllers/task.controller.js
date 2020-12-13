@@ -4,7 +4,7 @@ const Task = db.task;
 // Create and Save a new Task
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.id) {
+    if (!req.body.title) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,10 +15,11 @@ exports.create = (req, res) => {
     const task = {
         title: req.body.title,
         description: req.body.description,
-        done: req.body.done
+        done: req.body.done,
+        userId: req.body.userId
     };
 
-    // Save Car in the database
+    // Save Task in the database
     Task.create(task)
         .then(data => {
             res.send(data);
@@ -46,7 +47,7 @@ exports.findAll = (req, res) => {
       });
 };
 
-// Find a single Box with an id
+// Find a single task with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
@@ -60,6 +61,23 @@ exports.findOne = (req, res) => {
           });
       });
 };
+
+// Retrieve all tasks from an user
+exports.findAllByUserId = (req, res) => {
+    const id = req.params.id;
+
+    Task.findAll({
+        where: {userId: id}
+    }).then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving tasks."
+        });
+    });
+}
 
 // Update a task by the id in the request
 exports.update = (req, res) => {

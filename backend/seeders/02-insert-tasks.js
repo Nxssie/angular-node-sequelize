@@ -5,6 +5,7 @@ module.exports = {
       title: "test",
       description: "Sample description for test task",
       done: true,
+      userId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
@@ -12,6 +13,7 @@ module.exports = {
       title: "test2",
       description: "Sample description for test task 2 for dev purposes",
       done: false,
+      userId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

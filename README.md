@@ -23,7 +23,7 @@
     <a href="https://github.com/Nxssie/angular-node-sequelize"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://xd.adobe.com/view/19b25eaf-befe-446d-9dac-c69c163cc6ad-4ce1/">View Mockup</a>
+    <a href="https://github.com/Nxssie/angular-node-sequelize">View Demo</a>
     ·
     <a href="https://github.com/Nxssie/angular-node-sequelize/issues">Report Bug</a>
     ·
@@ -65,6 +65,17 @@
 
 This simple application provides users with the ability to manage their day-to-day tasks. Allowing them to set a title, which will act as a summary of the task and a description, which will be the content of it.
 
+#### Use case Diagram
+
+<p align="center">
+  <img src="images/use-case.png" alt="Use case">
+</p>
+
+#### Entity-Relationship Diagram
+
+<p align="center">
+  <img src="images/entity-relationship.png" alt="Entity-Relationship Diagram">
+</p>
 
 ### Built With
 
