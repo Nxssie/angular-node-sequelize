@@ -1,7 +1,10 @@
+/.idea
+/.vscode
+
 /backend/node_modules
 /backend/.env
+/backend/.idea/
 
 /frontend/node_modules
 /frontend/.env
-
-/.idea/
+/frontend/.idea/
