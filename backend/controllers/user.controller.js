@@ -22,6 +22,8 @@ exports.create = (req, res) => {
     isAdmin: req.body.isAdmin ? req.body.isAdmin : false
   };
 
+  console.log(user);
+
   User.findOne({ where: { username: user.username } })
     .then(data => {
       if (data) {

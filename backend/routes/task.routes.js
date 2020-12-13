@@ -12,7 +12,7 @@ module.exports = app => {
   router.get("/", auth.isAuthenticated, tasks.findAll);
 
   // Retrieve all Task by user ID
-  router.get("/user/:id", auth.isAuthenticatedActualUser, tasks.findAllByUserId);
+  router.get("/user/:id", auth.isAuthenticated, tasks.findAllByUserId);
 
   // Retrieve a single Task with id
   router.get("/:id", tasks.findOne);

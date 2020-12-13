@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': <string>localStorage.getItem("ACCESS_TOKEN")
   }),
 };
 const apiUrl = 'http://localhost:4000/api/tasks';
@@ -19,21 +20,17 @@ const apiUrl = 'http://localhost:4000/api/tasks';
   providedIn: 'root',
 })
 export class TaskService {
+
+  myHeaders = {
+    headers: new HttpHeaders({
+      'Authorization': <string>localStorage.getItem("ACCESS_TOKEN"),
+    }),
+  };
+
   constructor(private http: HttpClient, private router: Router) {}
 
   getAll(): Observable<Task[]> {
-    var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6InRlc3QiLCJ1c2VybmFtZSI6InRlc3QxMyIsImlzQWRtaW4iOmZhbHNlLCJwYXNzd29yZCI6IiQyYSQxMCRvVmR3bk5aZ1pzRVY3RGNzTGVEdUNlWWplNm10VUpMVkw4WU1HRmNNLkJTS202Y2dtZXR3aSIsImlhdCI6MTYwNzcxNjkxOSwiZXhwIjoxNjA3ODAzMzE5fQ.WhHi4LqqZjanKagOFMlp2cvZjwXbWqOuy60K6Fw4VYU'
-    );
-    myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
-    const headersOptions = new Headers({
-      headers: myHeaders
-    })
-
-
-    return this.http.get<Task[]>(apiUrl, myHeaders.toString());
+    return this.http.get<Task[]>(apiUrl, this.myHeaders);
   }
 
   getTaskByUserId(id: number): Observable<Task[]> {

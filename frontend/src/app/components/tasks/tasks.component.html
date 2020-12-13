@@ -4,7 +4,6 @@
       <mat-card-header>
         <mat-card-title>{{ t.title }}</mat-card-title>
         <mat-card-subtitle>
-          User: {{ t.userId }}
           <mat-icon color="warn" *ngIf="t.done; else undone" id="task-done"
             >done_all</mat-icon
           >

@@ -19,16 +19,48 @@ var RegisterComponent = /** @class */ (function () {
         /*  Person's name (first, last, or both) in any letter case. Although not perfect, this expression
             will filter out many incorrect name formats (especially numerics and invalid special characters).*/
         this.namePattern = '^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$';
-        this.registerForm = this.fb.group({
-            username: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5), forms_1.Validators.maxLength(20)]],
-            password: ['', [forms_1.Validators.required, forms_1.Validators.pattern(this.passwordPattern)]],
-            name: ['', [forms_1.Validators.required, forms_1.Validators.pattern(this.namePattern)]]
-        });
+        /* this.registerForm = this.fb.group({
+          username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+          password: ['', [Validators.required]],
+          name: ['',  [Validators.required]]
+        }) */
     }
+    Object.defineProperty(RegisterComponent.prototype, "username", {
+        get: function () {
+            return this.registerForm.get('username');
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(RegisterComponent.prototype, "name", {
+        get: function () {
+            return this.registerForm.get('name');
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(RegisterComponent.prototype, "password", {
+        get: function () {
+            return this.registerForm.get('password');
+        },
+        enumerable: false,
+        configurable: true
+    });
     RegisterComponent.prototype.ngOnInit = function () {
+        this.registerForm = new forms_1.FormGroup({
+            username: new forms_1.FormControl('', [
+                forms_1.Validators.required,
+                forms_1.Validators.minLength(5)
+            ]),
+            password: new forms_1.FormControl('', [
+                forms_1.Validators.required
+            ]),
+            name: new forms_1.FormControl('', [
+                forms_1.Validators.required
+            ])
+        });
     };
     RegisterComponent.prototype.onSubmit = function (userData) {
-        var _this = this;
         if (!this.registerForm.valid) {
             console.warn('Please provide all the required values!');
             console.log(userData);
@@ -42,7 +74,8 @@ var RegisterComponent = /** @class */ (function () {
                 isAdmin: false
             };
             this.authService.register(user).subscribe(function (u) {
-                _this.router.navigateByUrl("/login");
+                console.log(u);
+                //this.router.navigateByUrl("/login");
             });
         }
     };

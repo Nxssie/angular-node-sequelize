@@ -52,17 +52,29 @@ var AuthService = /** @class */ (function () {
         this.AUTH_SERVER_ADDRESS = 'http://localhost:4000';
         this.authSubject = new rxjs_1.BehaviorSubject(false);
     }
+    AuthService.prototype.getOptions = function (user) {
+        var base64UserAndPassword = window.btoa(user.username + ":" + user.password);
+        var basicAccess = 'Basic ' + base64UserAndPassword;
+        var options = {
+            headers: {
+                'Authorization': basicAccess,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+            //, withCredentials: true
+        };
+        return options;
+    };
     AuthService.prototype.register = function (user) {
         var _this = this;
-        return this.httpClient.post(this.AUTH_SERVER_ADDRESS + "/api/users", user).pipe(operators_1.tap(function (res) { return __awaiter(_this, void 0, void 0, function () {
+        return this.httpClient.post(this.AUTH_SERVER_ADDRESS + "/api/users", user, this.getOptions(user)).pipe(operators_1.tap(function (res) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!res.user) return [3 /*break*/, 3];
-                        return [4 /*yield*/, localStorage.setItem("ACCESS_TOKEN", res.user.access_token)];
+                        return [4 /*yield*/, localStorage.setItem("ACCESS_TOKEN", res.access_token)];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, localStorage.setItem("EXPIRES_IN", res.user.expires_in)];
+                        return [4 /*yield*/, localStorage.setItem("ACTUAL_USER_ID", res.user.id.toFixed())];
                     case 2:
                         _a.sent();
                         this.authSubject.next(true);
@@ -74,15 +86,15 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.login = function (user) {
         var _this = this;
-        return this.httpClient.post(this.AUTH_SERVER_ADDRESS + "/api/users/signin", user).pipe(operators_1.tap(function (res) { return __awaiter(_this, void 0, void 0, function () {
+        return this.httpClient.post(this.AUTH_SERVER_ADDRESS + "/api/users/signin", null, this.getOptions(user)).pipe(operators_1.tap(function (res) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!res.user) return [3 /*break*/, 3];
-                        return [4 /*yield*/, localStorage.setItem("ACCESS_TOKEN", res.user.access_token)];
+                        return [4 /*yield*/, localStorage.setItem("ACCESS_TOKEN", res.access_token)];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, localStorage.setItem("EXPIRES_IN", res.user.expires_in)];
+                        return [4 /*yield*/, localStorage.setItem("ACTUAL_USER_ID", res.user.id.toFixed())];
                     case 2:
                         _a.sent();
                         this.authSubject.next(true);
@@ -96,10 +108,10 @@ var AuthService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, localStorage.remove("ACCESS_TOKEN")];
+                    case 0: return [4 /*yield*/, localStorage.removeItem("ACCESS_TOKEN")];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, localStorage.remove("EXPIRES_IN")];
+                        return [4 /*yield*/, localStorage.removeItem("ACTUAL_USER_ID")];
                     case 2:
                         _a.sent();
                         this.authSubject.next(false);
@@ -109,7 +121,12 @@ var AuthService = /** @class */ (function () {
         });
     };
     AuthService.prototype.isLoggedIn = function () {
-        return this.authSubject.asObservable();
+        // return this.authSubject.asObservable();
+        var token = localStorage.getItem("ACCESS_TOKEN");
+        if (token) { //Just check if exists. This should be checked with current date
+            return true;
+        }
+        return false;
     };
     AuthService = __decorate([
         core_1.Injectable({

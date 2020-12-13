@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from 'src/app/models/user.model';
@@ -12,7 +12,9 @@ import { User } from 'src/app/models/user.model';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
+  user!: User;
+
+  registerForm!: FormGroup;
   // requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces
   passwordPattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$";
 
@@ -25,14 +27,38 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) { 
-    this.registerForm = this.fb.group({
+    /* this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
       password: ['', [Validators.required]],
       name: ['',  [Validators.required]]
-    })
+    }) */
+  }
+
+  get username() {
+    return this.registerForm.get('username');
+  }
+
+  get name() {
+    return this.registerForm.get('name');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
   }
 
   ngOnInit(): void {
+    this.registerForm = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+      password: new FormControl('', [
+        Validators.required
+      ]),
+      name: new FormControl('', [
+        Validators.required
+      ])
+    })
   }
 
   onSubmit(userData: any) {
@@ -49,7 +75,8 @@ export class RegisterComponent implements OnInit {
         isAdmin: false
       }
       this.authService.register(user).subscribe((u) => {
-        this.router.navigateByUrl("/login");
+        console.log(u);
+        //this.router.navigateByUrl("/login");
       })
     }
   }
