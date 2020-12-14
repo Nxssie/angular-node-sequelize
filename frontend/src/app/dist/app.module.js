@@ -29,6 +29,9 @@ var table_1 = require("@angular/material/table");
 var paginator_1 = require("@angular/material/paginator");
 var sort_1 = require("@angular/material/sort");
 var checkbox_1 = require("@angular/material/checkbox");
+var slide_toggle_1 = require("@angular/material/slide-toggle");
+var snack_bar_1 = require("@angular/material/snack-bar");
+var dialog_1 = require("@angular/material/dialog");
 var sidenav_component_1 = require("./components/sidenav/sidenav.component");
 var about_component_1 = require("./components/about/about.component");
 var profile_component_1 = require("./components/profile/profile.component");
@@ -38,6 +41,8 @@ var http_1 = require("@angular/common/http");
 var add_task_component_1 = require("./components/tasks/add-task/add-task.component");
 var login_component_1 = require("./components/user/login/login.component");
 var register_component_1 = require("./components/user/register/register.component");
+var edit_tasks_component_1 = require("./components/tasks/edit-tasks/edit-tasks.component");
+var edit_user_component_1 = require("./components/user/edit-user/edit-user.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -52,7 +57,9 @@ var AppModule = /** @class */ (function () {
                 settings_component_1.SettingsComponent,
                 add_task_component_1.AddTaskComponent,
                 login_component_1.LoginComponent,
-                register_component_1.RegisterComponent
+                register_component_1.RegisterComponent,
+                edit_tasks_component_1.EditTasksComponent,
+                edit_user_component_1.EditUserComponent
             ],
             imports: [
                 auth_module_1.AuthModule,
@@ -73,8 +80,11 @@ var AppModule = /** @class */ (function () {
                 table_1.MatTableModule,
                 paginator_1.MatPaginatorModule,
                 sort_1.MatSortModule,
+                snack_bar_1.MatSnackBarModule,
+                dialog_1.MatDialogModule,
                 card_1.MatCardModule,
                 form_field_1.MatFormFieldModule,
+                slide_toggle_1.MatSlideToggleModule,
                 http_1.HttpClientModule
             ],
             providers: [],

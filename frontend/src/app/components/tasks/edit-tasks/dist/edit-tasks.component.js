@@ -16,6 +16,7 @@ var EditTasksComponent = /** @class */ (function () {
         this.router = router;
         this.fb = fb;
         this.taskID = +localStorage.getItem("ACTUAL_TASK");
+        this.currentDate = new Date();
         this.editForm = this.fb.group({
             title: ['', [forms_1.Validators.required, forms_1.Validators.maxLength(20)]],
             description: ['', [forms_1.Validators.required]],
@@ -64,8 +65,8 @@ var EditTasksComponent = /** @class */ (function () {
     };
     EditTasksComponent.prototype.getCurrentUser = function () {
         var _this = this;
-        var userId = +localStorage.getItem("ACTUAL_USER_ID");
-        this.userService.getUserById(userId).subscribe(function (user) {
+        var id = localStorage.getItem("ACTUAL_USER_ID");
+        this.userService.getUserById(id).subscribe(function (user) {
             _this.user = user;
         });
     };

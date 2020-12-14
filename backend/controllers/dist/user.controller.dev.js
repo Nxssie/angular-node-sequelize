@@ -7,7 +7,9 @@ var Op = db.Sequelize.Op;
 
 var utils = require("../utils");
 
-var bcrypt = require('bcryptjs'); // Create and Save a new User
+var bcrypt = require('bcryptjs');
+
+var fs = require("fs"); // Create and Save a new User
 
 
 exports.create = function (req, res) {
@@ -26,7 +28,6 @@ exports.create = function (req, res) {
     name: req.body.name,
     isAdmin: req.body.isAdmin ? req.body.isAdmin : false
   };
-  console.log(user);
   User.findOne({
     where: {
       username: user.username
@@ -122,31 +123,29 @@ exports.update = function (req, res) {
   });
 }; // Delete a User with the specified id in the request
 
-/* // exports.delete = (req, res) => {
-//   const id = req.params.id;
 
-//   User.destroy({
-//     where: { id: id }
-//   })
-//     .then(num => {
-//       if (num == 1) {
-//         res.send({
-//           message: "User was deleted successfully!"
-//         });
-//       } else {
-//         res.send({
-//           message: `Cannot delete User with id=${id}. Maybe User was not found!`
-//         });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).send({
-//         message: "Could not delete User with id=" + id
-//       });
-//     });
-// };
-
-// // Delete all Users from the database.
+exports["delete"] = function (req, res) {
+  var id = req.params.id;
+  User.destroy({
+    where: {
+      id: id
+    }
+  }).then(function (num) {
+    if (num == 1) {
+      res.send({
+        message: "User was deleted successfully!"
+      });
+    } else {
+      res.send({
+        message: "Cannot delete User with id=".concat(id, ". Maybe User was not found!")
+      });
+    }
+  })["catch"](function (err) {
+    res.status(500).send({
+      message: "Could not delete User with id=" + id
+    });
+  });
+}; // // Delete all Users from the database.
 // exports.deleteAll = (req, res) => {
 //   User.destroy({
 //     where: {},

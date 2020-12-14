@@ -15,6 +15,7 @@ export class EditTasksComponent implements OnInit {
   task!: Task;
   taskID: number = +localStorage.getItem("ACTUAL_TASK")!;
   user!: User;
+  currentDate = new Date();
 
   editForm: FormGroup;
 
@@ -71,9 +72,9 @@ export class EditTasksComponent implements OnInit {
   }
 
   getCurrentUser() {
-    let userId = +localStorage.getItem("ACTUAL_USER_ID")!;
-    this.userService.getUserById(userId).subscribe((user) => {
+    let id =  <number><unknown>localStorage.getItem("ACTUAL_USER_ID");
+    this.userService.getUserById(id).subscribe((user) => {
       this.user = user;
-    })
+    });
   }
 }

@@ -2,7 +2,7 @@
   position: absolute;
   display: block;
   margin-top: 2em;
-  margin-right: 2em;
+  margin-right: 2vw;
   top: 0;
   left: 100;
   bottom: 10;
@@ -14,7 +14,7 @@
   position: absolute;
   display: block;
   margin-top: 2em;
-  margin-right: 2em;
+  margin-right: 2vw;
   top: 0;
   left: 100;
   bottom: 10;
@@ -25,6 +25,10 @@
   position: fixed;
   right: 30px;
   bottom: 50px;
+}
+
+.container {
+  overflow-wrap: break-word;
 }
 
 #extended-desktop-button {

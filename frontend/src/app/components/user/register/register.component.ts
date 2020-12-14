@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from 'src/app/models/user.model';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -25,46 +26,59 @@ export class RegisterComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) { 
     /* this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
       password: ['', [Validators.required]],
       name: ['',  [Validators.required]]
     }) */
-  }
 
-  get username() {
-    return this.registerForm.get('username');
-  }
 
-  get name() {
-    return this.registerForm.get('name');
-  }
-
-  get password() {
-    return this.registerForm.get('password');
-  }
-
-  ngOnInit(): void {
     this.registerForm = new FormGroup({
-      username: new FormControl('', [
+      username: new FormControl([''], [
         Validators.required,
         Validators.minLength(5)
       ]),
-      password: new FormControl('', [
+      password: new FormControl([''], [
         Validators.required
       ]),
-      name: new FormControl('', [
+      name: new FormControl([''], [
         Validators.required
       ])
     })
+
+  }
+
+  ngOnInit(): void {
+  }
+
+  getErrorMessage() {
+
+    if(!this.registerForm.value.username.required) {
+      return "Username is required";
+    }
+    
+    if(!this.registerForm.value.name.required) {
+      return "Name is required";
+    }
+    
+    if(!this.registerForm.value.password.required) {
+      return "Password is required";
+    }
+
+    if(!this.registerForm.value.username.minLength) {
+      return "Username must be 5 characters min.";
+    } 
+
+    return "Form invalid";
+    
   }
 
   onSubmit(userData: any) {
     if(!this.registerForm.valid) {
-      console.warn('Please provide all the required values!');
-      console.log(userData)
+        const dialogRef = this.dialog.open(InvalidRegisterFormModal);
     } else {
 
       let user: User = {
@@ -82,6 +96,24 @@ export class RegisterComponent implements OnInit {
         //this.router.navigateByUrl("/login");
       })
     }
+  }
+
+  
+}
+
+@Component({
+  selector: 'invalid-register-form-modal',
+  templateUrl: 'invalid.register.form.modal.html',
+  styleUrls: ['./register.component.sass']
+})
+export class InvalidRegisterFormModal {
+
+  constructor(
+    public dialogRef: MatDialogRef<InvalidRegisterFormModal>
+  ) {}
+
+  onClose(): void {
+    this.dialogRef.close();
   }
 
 }

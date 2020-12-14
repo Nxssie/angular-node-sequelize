@@ -9,8 +9,8 @@
         <mat-list dense>
           <mat-list-item> Username:  {{user.username}}</mat-list-item>
           <mat-list-item> Name: {{user.name}} </mat-list-item>
-          <mat-list-item> Date created: {{user.createdAt}} </mat-list-item>
-          <mat-list-item> Date updated: {{user.updatedAt}} </mat-list-item>
+          <mat-list-item> Date created: {{user.createdAt | date: "yyyy-MM-dd"}} </mat-list-item>
+          <mat-list-item> Date updated: {{user.updatedAt | date: "yyyy-MM-dd"}} </mat-list-item>
           <mat-list-item *ngIf="user.isAdmin; else userRole">
             Role: admin
           </mat-list-item>

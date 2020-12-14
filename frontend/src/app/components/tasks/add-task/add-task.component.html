@@ -13,7 +13,7 @@
             <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)">
               <div class="row">
                 <div class="col">
-                  <mat-form-field appearance="standard">
+                  <mat-form-field appearance="standard" class="full-width-field">
                     <mat-label>Title:</mat-label>
                     <input matInput formControlName="title" />
                   </mat-form-field>
@@ -24,7 +24,7 @@
               </div>
               <div class="row">
                 <div class="col-6">
-                  <mat-form-field appearance="standard">
+                  <mat-form-field appearance="standard" class="full-width-field">
                     <mat-label>Description:</mat-label>
                     <textarea matInput formControlName="description"></textarea>
                   </mat-form-field>

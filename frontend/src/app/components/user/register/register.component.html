@@ -1,68 +1,54 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-12">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            <h1>Register</h1>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form
-            [formGroup]="registerForm"
-            (ngSubmit)="onSubmit(registerForm.value)"
-          >
-            <p>
-              <mat-form-field class="full-width-field" appearance="outline">
-                <mat-label>Username:</mat-label>
-                <input matInput id="username" formControlName="username" required/>
-              </mat-form-field>
-            </p>
+      <h1>Register</h1>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" #formDir="ngForm">
+        <p>
+          <mat-form-field class="full-width-field" appearance="outline">
+            <mat-label>Username:</mat-label>
+            <input matInput id="username" formControlName="username"/>
+            <mat-error *ngIf="!registerForm.value.username.valid"> {{getErrorMessage()}} </mat-error>
+          </mat-form-field>
+        </p>
 
-            <p>
-              <mat-form-field class="full-width-field" appearance="outline">
-                <mat-label>Name:</mat-label>
-                <input matInput id ="name" formControlName="name" />
-              </mat-form-field>
-            </p>
+        <p>
+          <mat-form-field class="full-width-field" appearance="outline">
+            <mat-label>Name:</mat-label>
+            <input matInput id="name" formControlName="name"/>
+            <mat-error *ngIf="!registerForm.value.name.valid"> {{getErrorMessage()}} </mat-error>
+          </mat-form-field>
+        </p>
 
-            <p>
-              <mat-form-field class="full-width-field" appearance="outline">
-                <mat-label>Password:</mat-label>
-                <input matInput type="password" formControlName="password" />
-              </mat-form-field>
-            </p>
+        <p>
+          <mat-form-field class="full-width-field" appearance="outline">
+            <mat-label>Password:</mat-label>
+            <input matInput type="password" formControlName="password" />
+            <mat-error *ngIf="!registerForm.value.password.valid"> {{getErrorMessage()}} </mat-error>
+          </mat-form-field>
+        </p>
 
-            <div class="row">
-              <div class="col text-center">
-                <button
-                  class="btn btn-lg btn-block"
-                  type="submit"
-                  id="register-button"
-                  mat-raised-button
-                >
-                  Register
-                </button>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col text-center">
+            <button class="btn btn-lg btn-block" type="submit" id="register-button" mat-raised-button>
+              Register
+            </button>
+          </div>
+        </div>
 
-            <div class="row mt-4">
-              <div class="col text-center">
-                <button
-                  class="btn btn-lg btn-block"
-                  type="button"
-                  routerLink="/login"
-                  id="cancel-button"
-                  mat-raised-button
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </form>
-        </mat-card-content>
-        <mat-card-actions> </mat-card-actions>
-      </mat-card>
+        <div class="row mt-4">
+          <div class="col text-center">
+            <button
+              class="btn btn-lg btn-block"
+              type="button"
+              routerLink="/login"
+              id="cancel-button"
+              mat-raised-button
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

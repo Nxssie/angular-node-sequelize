@@ -14,10 +14,10 @@ module.exports = function (app) {
 
   router.get("/:id", users.findOne); // Update a User with id
 
-  router.put("/:id", auth.isAuthenticatedActualUser, users.update); // Sign in
+  router.put("/:id", auth.isAuthenticated, users.update); // Sign in
 
   router.post("/signin", auth.signin); // Delete a User with id
+  //router.delete("/:id", users.delete);
 
-  router["delete"]("/:id", users["delete"]);
   app.use('/api/users', router);
 };

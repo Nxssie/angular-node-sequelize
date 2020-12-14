@@ -6,11 +6,6 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 import { TaskService } from '../../services/task.service';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',

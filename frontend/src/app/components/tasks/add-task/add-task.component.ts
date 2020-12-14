@@ -44,10 +44,6 @@ export class AddTaskComponent implements OnInit {
     this.getCurrentUser();
   }
 
-  // putUsernameCorrectly() {
-  //   document.getElementById("username-field")!.innerHTML = `${this.currentUser.id};`
-  // }
-
   getCurrentUser() {
     let id =  <number><unknown>localStorage.getItem("ACTUAL_USER_ID");
     this.userService.getUserById(id).subscribe((user) => {
@@ -69,10 +65,18 @@ export class AddTaskComponent implements OnInit {
         userId: this.currentUser.id
       }
       this.taskService.addTask(task).subscribe((c) => {
-        this.snackBar.open("Task added successfully", "Okay", {
-          duration: 2000,
+        let snackBarRef = this.snackBar.open("Task added successfully", "Okay", {
+          duration: 40000,
         });
-        //this.router.navigateByUrl("/mytasks");
+
+        snackBarRef.afterDismissed().subscribe(() => {
+          this.router.navigateByUrl("/mytasks");
+        })
+
+        setTimeout(() => {
+          this.router.navigateByUrl("/mytasks");
+        }, 4000)
+
       })
     }
   }

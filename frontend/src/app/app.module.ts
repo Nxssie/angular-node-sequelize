@@ -22,7 +22,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AboutComponent } from './components/about/about.component';
@@ -48,7 +49,7 @@ import { EditUserComponent } from './components/user/edit-user/edit-user.compone
     LoginComponent,
     RegisterComponent,
     EditTasksComponent,
-    EditUserComponent,
+    EditUserComponent
   ],
   imports: [
     AuthModule,
@@ -70,6 +71,7 @@ import { EditUserComponent } from './components/user/edit-user/edit-user.compone
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    MatDialogModule,
     MatCardModule,
     MatFormFieldModule,
     MatSlideToggleModule,
