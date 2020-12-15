@@ -27,6 +27,8 @@
   <a href="https://github.com/Nxssie/angular-node-sequelize/issues">Report Bug</a>
   ·
   <a href="https://github.com/Nxssie/angular-node-sequelize/issues">Request Feature</a>
+  ·
+  <a href="https://documenter.getpostman.com/view/13039694/TVYF8Jio">Postman Docs</a>
 </p>
 
 <!-- TABLE OF CONTENTS -->
