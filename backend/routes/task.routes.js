@@ -6,7 +6,7 @@ module.exports = app => {
   
 
   // Create a new Task
-  router.post("/", tasks.create);
+  router.post("/", auth.isAuthenticated, tasks.create);
 
   // Retrieve all Task
   router.get("/", auth.isAuthenticated, tasks.findAll);
@@ -15,16 +15,13 @@ module.exports = app => {
   router.get("/user/:id", auth.isAuthenticated, tasks.findAllByUserId);
 
   // Retrieve a single Task with id
-  router.get("/:id", tasks.findOne);
+  router.get("/:id", auth.isAuthenticated, tasks.findOne);
 
-  // // Update a Task with id
-  router.put("/:id", tasks.update);
+  // Update a Task with id
+  router.put("/:id", auth.isAuthenticated, tasks.update);
 
-  // // Delete a Task with id
-  router.delete("/:id", tasks.delete);
-
-  // // Create a new Tasks
-  router.delete("/", tasks.deleteAll);
+  // Delete a Task with id
+  router.delete("/:id", auth.isAuthenticated, tasks.delete);
 
   app.use('/api/tasks', router);
 };

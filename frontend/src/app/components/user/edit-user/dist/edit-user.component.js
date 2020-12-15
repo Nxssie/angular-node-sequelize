@@ -38,7 +38,7 @@ var EditUserComponent = /** @class */ (function () {
     };
     EditUserComponent.prototype.onSubmit = function (editUserData) {
         if (!this.editUserForm.valid) {
-            var dialogRef = this.dialog.open(InvalidRegisterFormModal);
+            this.dialog.open(InvalidRegisterFormModal);
         }
         else {
             var user = {

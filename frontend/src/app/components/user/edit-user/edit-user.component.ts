@@ -48,7 +48,7 @@ export class EditUserComponent implements OnInit {
 
   onSubmit(editUserData: any) {
     if (!this.editUserForm.valid) {
-      const dialogRef = this.dialog.open(InvalidRegisterFormModal);
+      this.dialog.open(InvalidRegisterFormModal);
     } else {
       let user: User = {
         id: 0,
