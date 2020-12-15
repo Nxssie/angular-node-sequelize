@@ -4,14 +4,13 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/Nxssie/angular-node-sequelize">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo" width="128" height="128">
   </a>
 </p>
 
@@ -23,7 +22,7 @@
   <a href="https://github.com/Nxssie/angular-node-sequelize"><strong>Explore the docs »</strong></a>
   <br />
   <br />
-  <a href="https://github.com/Nxssie/angular-node-sequelize">View Demo</a>
+  <a href="https://xd.adobe.com/view/19b25eaf-befe-446d-9dac-c69c163cc6ad-4ce1/">View Mockup</a>
   ·
   <a href="https://github.com/Nxssie/angular-node-sequelize/issues">Report Bug</a>
   ·
@@ -74,6 +73,88 @@ This simple application provides users with the ability to manage their day-to-d
   <img src="images/entity-relationship.png" alt="Entity-Relationship Diagram">
 </p>
 
+#### Technology comparison
+
+###### Angular vs React vs Vue
+
+[Extended Comparison](https://www.codeinwp.com/blog/angular-vs-vue-vs-react/)
+
+<!-- Table -->
+<div align="center">
+<table width="100%">
+<caption>The history of Angular vs React vs Vue</caption>
+<thead>
+<tr>
+<th width="25%"></th>
+<th width="25%"><strong>Angular</strong></th>
+<th width="25%"><strong>React</strong></th>
+<th width="25%"><strong>Vue</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initial release</td>
+<td>2010</td>
+<td>2013</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>Official site</td>
+<td><a href="https://angular.io" target="_blank" rel="noopener">angular.io</a></td>
+<td><a href="https://reactjs.org" target="_blank" rel="noopener">reactjs.org</a></td>
+<td><a href="https://vuejs.org" target="_blank" rel="noopener">vuejs.org</a></td>
+</tr>
+<tr>
+<td>Approx. size (KB)</td>
+<td>500</td>
+<td>100</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Current version</td>
+<td>11</td>
+<td>17.x</td>
+<td>3.x</td>
+</tr>
+<tr>
+<td>Used by</td>
+<td>Google, Wix</td>
+<td>Facebook, Uber</td>
+<td>Alibaba, GitLab</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<br/>
+
+<!-- Angular -->
+
+<br/>
+<p align="center">
+  <img align="center" src="https://iotvnaw69daj.i.optimole.com/AXVzL2w.n2y9~6666f/w:150/h:150/q:90/dpr:2.0/rt:fill/g:ce/https://www.codeinwp.com/wp-content/uploads/2019/01/angular-logo.png" alt="Vue.js Logo" width="80" height="80">
+
+  <p>Angular is the most mature of the frameworks, has good backing in terms of contributors and is a complete package. However, the learning curve is steep and concepts of development in Angular may put off new developers. Angular is a good choice for companies with large teams and developers who already use TypeScript.</p>
+  
+</p>
+
+<!-- React -->
+<p align="center">
+  <img align="center" src="https://iotvnaw69daj.i.optimole.com/AXVzL2w.n2y9~6666f/w:150/h:150/q:90/dpr:2.0/rt:fill/g:ce/https://www.codeinwp.com/wp-content/uploads/2019/01/react-logo.png" alt="Vue.js Logo" width="80" height="80">
+
+  <p>React is just old enough to be mature and has a huge number of contributions from the community. It has gained widespread acceptance. The job market for React is really good, and the future for this framework looks bright. React looks like a good choice for someone getting started with front-end JavaScript frameworks, startups and developers who like some flexibility. The ability to integrate with other frameworks seamlessly gives it a great advantage for those who would like some flexibility in their code.</p>
+</p>
+
+<!-- Vue -->
+
+<br/>
+<p align="center">
+  <img align="center" src="https://iotvnaw69daj.i.optimole.com/AXVzL2w.n2y9~6666f/w:150/h:150/q:90/dpr:2.0/rt:fill/g:ce/https://www.codeinwp.com/wp-content/uploads/2019/01/vue-logo.png" alt="Vue.js Logo" width="80" height="80">
+
+  <p>Vue is newest to the arena, without the backing of a major company. However, it has done really well in the last few years to come out as a strong competitor for Angular and React. This is perhaps playing a role with a lot of Chinese giants like Alibaba and Baidu picking Vue as their primary front-end JavaScript framework. However, it remains to be seen how it does in the future and one is justified to be cautious with it. Vue should be your choice if you prefer simplicity, but also like flexibility.</p>
+  
+</p>
+
 ### Built With
 
 - [NodeJS](https://nodejs.org/es/)
@@ -112,11 +193,9 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-As it is a full stack application. We will have server-side usage and client-side usage. You can check each individually on the links provided.
+As it is a full stack application. We will have server-side usage and client-side usage. You can check each individually on the wiki provided.
 
-_1. Backend usage, please refer to the [Backend Documentation](https://github.com/Nxssie/angular-node-sequelize/tree/master/backend)._
-
-_2. Frontend usage, please refer to the [Frontend Documentation](https://github.com/Nxssie/angular-node-sequelize/tree/master/frontend)._
+_Please refer to the [Task Manager Wiki](https://github.com/Nxssie/angular-node-sequelize/wiki)._
 
 <!-- ROADMAP -->
 
