@@ -21,16 +21,10 @@ const apiUrl = 'http://localhost:4000/api/tasks';
 })
 export class TaskService {
 
-  myHeaders = {
-    headers: new HttpHeaders({
-      'Authorization': <string>localStorage.getItem("ACCESS_TOKEN"),
-    }),
-  };
-
   constructor(private http: HttpClient, private router: Router) {}
 
   getAll(): Observable<Task[]> {
-    return this.http.get<Task[]>(apiUrl, this.myHeaders);
+    return this.http.get<Task[]>(apiUrl, httpOptions);
   }
 
   getTaskByUserId(id: number): Observable<Task[]> {
