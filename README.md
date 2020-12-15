@@ -22,7 +22,7 @@
   <a href="https://github.com/Nxssie/angular-node-sequelize"><strong>Explore the docs »</strong></a>
   <br />
   <br />
-  <a href="https://github.com/Nxssie/angular-node-sequelize">View Demo</a>
+  <a href="https://xd.adobe.com/view/19b25eaf-befe-446d-9dac-c69c163cc6ad-4ce1/">View Mockup</a>
   ·
   <a href="https://github.com/Nxssie/angular-node-sequelize/issues">Report Bug</a>
   ·
