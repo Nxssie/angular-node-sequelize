@@ -5,7 +5,7 @@ import {
   HttpErrorResponse,
 } from "@angular/common/http";
 import { User } from "../../models/user.model";
-import { Observable, of } from "rxjs";
+import { Observable, of, BehaviorSubject } from "rxjs";
 import { catchError, tap, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 const httpOptions = {
@@ -22,12 +22,14 @@ import { AuthResponse } from  '../../components/user/auth/auth-response';
 })
 export class UserService {
 
+  authSubject  =  new  BehaviorSubject(false);
+
   constructor(
     private http: HttpClient, 
     private router: Router) { }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(apiUrl + "/" + id);
+    return this.http.get<User>(`${apiUrl}/${id}`);
   }
 
   update(user: User, id: number): Observable<AuthResponse> {
@@ -37,6 +39,7 @@ export class UserService {
         if (res.user) {
           await localStorage.setItem("ACCESS_TOKEN", res.access_token);
           await localStorage.setItem("ACTUAL_USER_ID", res.user.id.toFixed());
+          this.authSubject.next(true);
         }
       })
 
