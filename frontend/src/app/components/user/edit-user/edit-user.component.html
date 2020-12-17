@@ -17,6 +17,7 @@
                     >
                       <mat-label>Username:</mat-label>
                       <input matInput formControlName="username" />
+                      <mat-error *ngIf="!editUserForm.value.username.valid"> {{getUsernameErrorMessage()}} </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col-1"></div>
@@ -38,6 +39,7 @@
                     >
                       <mat-label>Name:</mat-label>
                       <input matInput formControlName="name" />
+                      <mat-error *ngIf="!editUserForm.value.name.valid"> {{getNameErrorMessage()}} </mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -50,6 +52,7 @@
                       >
                         <mat-label>Password:</mat-label>
                         <input matInput type="password" formControlName="password" />
+                        <mat-error *ngIf="!editUserForm.value.password.value"> {{getPasswordErrorMessage()}} </mat-error>
                       </mat-form-field>
                     </div>
                   </div>

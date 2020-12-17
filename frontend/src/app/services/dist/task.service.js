@@ -20,14 +20,9 @@ var TaskService = /** @class */ (function () {
     function TaskService(http, router) {
         this.http = http;
         this.router = router;
-        this.myHeaders = {
-            headers: new http_1.HttpHeaders({
-                'Authorization': localStorage.getItem("ACCESS_TOKEN")
-            })
-        };
     }
     TaskService.prototype.getAll = function () {
-        return this.http.get(apiUrl, this.myHeaders);
+        return this.http.get(apiUrl, httpOptions);
     };
     TaskService.prototype.getTaskByUserId = function (id) {
         return this.http.get(apiUrl + '/user/' + id, httpOptions);
@@ -50,11 +45,11 @@ var TaskService = /** @class */ (function () {
         bodyEncoded.append('description', task.description);
         bodyEncoded.append('done', task.done ? 'true' : 'false');
         var body = bodyEncoded.toString();
-        return this.http.put(apiUrl + '/' + id, body, httpOptions);
+        return this.http.put(apiUrl + "/" + id, body, httpOptions);
     };
     TaskService.prototype.deleteTask = function (id) {
         console.log(apiUrl + '/' + id);
-        return this.http["delete"](apiUrl + '/' + id);
+        return this.http["delete"](apiUrl + '/' + id, httpOptions);
     };
     TaskService = __decorate([
         core_1.Injectable({

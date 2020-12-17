@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Task } from 'src/app/models/task.model';
@@ -22,6 +23,7 @@ export class TasksComponent implements OnInit, AfterViewInit {
   constructor(
     private taskService: TaskService,
     private router: Router,
+    public dialog: MatDialog,
     private userService: UserService
   ) {}
 
@@ -29,7 +31,9 @@ export class TasksComponent implements OnInit, AfterViewInit {
     this.getUserAndTasks();
   }
 
-  async ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.getUserAndTasks();
+  }
 
   getAll() {
     this.taskService.getAll().subscribe((tasks) => {
@@ -55,9 +59,12 @@ export class TasksComponent implements OnInit, AfterViewInit {
     if (id == null) {
       console.log("This task doesn't exists");
     } else {
-      this.taskService.deleteTask(id).subscribe(() => {
+      localStorage.setItem('ACTUAL_TASK', id.toString());
+      this.dialog.open(ConfirmDeleteTaskDialog);
+
+      this.dialog.afterAllClosed.subscribe(() => {
         this.getAllOfCurrentUser();
-      });
+      })
     }
   }
 
@@ -92,6 +99,31 @@ export class TasksComponent implements OnInit, AfterViewInit {
         this.getAllOfCurrentUser();
       }
     })
+  }
+
+}
+
+@Component({
+  selector: 'confirm-delete-task.dialog',
+  templateUrl: 'confirm-delete-task.dialog.html',
+  styleUrls: ['./tasks.component.sass']
+})
+export class ConfirmDeleteTaskDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmDeleteTaskDialog>,
+    private taskService: TaskService
+  ) {}
+
+  onClose(): void {
+    this.dialogRef.close();
+  }
+
+  onConfirm(): void {
+    let id = +localStorage.getItem("ACTUAL_TASK")!;
+    this.taskService.deleteTask(id).subscribe(() => {
+      this.dialogRef.close();
+    });
   }
 
 }

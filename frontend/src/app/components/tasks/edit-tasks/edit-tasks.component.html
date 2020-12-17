@@ -17,6 +17,7 @@
                   >
                     <mat-label>Title:</mat-label>
                     <input matInput formControlName="title" />
+                    <mat-error *ngIf="!editForm.value.title.valid"> {{getTitleErrorMessage()}} </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-6">
@@ -33,6 +34,7 @@
                   >
                     <mat-label>Description:</mat-label>
                     <textarea matInput formControlName="description"></textarea>
+                    <mat-error *ngIf="!editForm.value.description.valid"> {{getDescriptionErrorMessage()}} </mat-error>
                   </mat-form-field>
                 </div>
               </div>

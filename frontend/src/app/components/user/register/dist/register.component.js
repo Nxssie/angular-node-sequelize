@@ -40,18 +40,24 @@ var RegisterComponent = /** @class */ (function () {
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
-    RegisterComponent.prototype.getErrorMessage = function () {
+    RegisterComponent.prototype.getUsernameErrorMessage = function () {
         if (!this.registerForm.value.username.required) {
             return "Username is required";
         }
+        if (!this.registerForm.value.username.minLength) {
+            return "Username must be 5 characters min.";
+        }
+        return "Form invalid";
+    };
+    RegisterComponent.prototype.getNameErrorMessage = function () {
         if (!this.registerForm.value.name.required) {
             return "Name is required";
         }
+        return "Form invalid";
+    };
+    RegisterComponent.prototype.getPasswordErrorMessage = function () {
         if (!this.registerForm.value.password.required) {
             return "Password is required";
-        }
-        if (!this.registerForm.value.username.minLength) {
-            return "Username must be 5 characters min.";
         }
         return "Form invalid";
     };

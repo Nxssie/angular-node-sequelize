@@ -53,11 +53,11 @@ export class TaskService {
     bodyEncoded.append('done', task.done ? 'true' : 'false');
     let body = bodyEncoded.toString();
 
-    return this.http.put(apiUrl + '/' + id, body, httpOptions);
+    return this.http.put(`${apiUrl}/${id}`, body, httpOptions);
   }
 
   deleteTask(id: number): Observable<any> {
     console.log(apiUrl + '/' + id);
-    return this.http.delete(apiUrl + '/' + id);
+    return this.http.delete(apiUrl + '/' + id, httpOptions);
   }
 }

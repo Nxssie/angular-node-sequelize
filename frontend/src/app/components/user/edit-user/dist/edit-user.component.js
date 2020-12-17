@@ -36,6 +36,27 @@ var EditUserComponent = /** @class */ (function () {
             });
         });
     };
+    EditUserComponent.prototype.getUsernameErrorMessage = function () {
+        if (!this.editUserForm.value.username.required) {
+            return "Username is required";
+        }
+        if (!this.editUserForm.value.username.minLength) {
+            return "Username must be 5 characters min.";
+        }
+        return "Form invalid";
+    };
+    EditUserComponent.prototype.getNameErrorMessage = function () {
+        if (!this.editUserForm.value.name.required) {
+            return "Name is required";
+        }
+        return "Form invalid";
+    };
+    EditUserComponent.prototype.getPasswordErrorMessage = function () {
+        if (!this.editUserForm.value.password.required) {
+            return "Password is required";
+        }
+        return "Form invalid";
+    };
     EditUserComponent.prototype.onSubmit = function (editUserData) {
         if (!this.editUserForm.valid) {
             this.dialog.open(InvalidRegisterFormModal);

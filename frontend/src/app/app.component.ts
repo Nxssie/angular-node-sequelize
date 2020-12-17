@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { AuthService } from './services/auth/auth.service';
 
 @Component({
@@ -7,5 +8,7 @@ import { AuthService } from './services/auth/auth.service';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'Task Manager';
+  constructor(private titleService:Title) {
+    this.titleService.setTitle("Task Manager");
+  }
 }

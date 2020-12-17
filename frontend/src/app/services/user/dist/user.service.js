@@ -45,6 +45,7 @@ exports.__esModule = true;
 exports.UserService = void 0;
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
+var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
 var httpOptions = {
     headers: new http_1.HttpHeaders({
@@ -57,6 +58,7 @@ var UserService = /** @class */ (function () {
     function UserService(http, router) {
         this.http = http;
         this.router = router;
+        this.authSubject = new rxjs_1.BehaviorSubject(false);
     }
     UserService.prototype.getUserById = function (id) {
         return this.http.get(apiUrl + "/" + id);
@@ -74,11 +76,15 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, localStorage.setItem("ACTUAL_USER_ID", res.user.id.toFixed())];
                     case 2:
                         _a.sent();
+                        this.authSubject.next(true);
                         _a.label = 3;
                     case 3: return [2 /*return*/];
                 }
             });
         }); }));
+    };
+    UserService.prototype.deleteUserById = function (id) {
+        return this.http["delete"](apiUrl + "/" + id);
     };
     UserService = __decorate([
         core_1.Injectable({

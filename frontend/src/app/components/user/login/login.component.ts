@@ -28,6 +28,28 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getUsernameErrorMessage() {
+
+    if(!this.loginForm.value.username.required) {
+      return "Username is required";
+    }
+    
+    if(!this.loginForm.value.username.minLength) {
+      return "Username must be 5 characters min.";
+    } 
+
+    return "Form invalid";
+    
+  }
+
+  getPasswordErrorMessage() {
+    if(!this.loginForm.value.password.required) {
+      return "Password is required";
+    }
+
+    return "Form invalid"
+  }
+
   onSubmit(loginData: any):void {
     if(!this.loginForm.valid) {
       console.warn('Provide all the required fields');

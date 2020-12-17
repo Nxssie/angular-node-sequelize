@@ -9,11 +9,29 @@ exports.__esModule = true;
 exports.ProfileComponent = void 0;
 var core_1 = require("@angular/core");
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent() {
+    function ProfileComponent(userService, authService, router) {
+        this.userService = userService;
+        this.authService = authService;
+        this.router = router;
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getCurrentUser();
     };
     ProfileComponent.prototype.getCurrentUser = function () {
+        var _this = this;
+        var id = localStorage.getItem("ACTUAL_USER_ID");
+        this.userService.getUserById(id).subscribe(function (user) {
+            _this.user = user;
+        });
+    };
+    ProfileComponent.prototype.deleteUser = function (id) {
+        var _this = this;
+        this.userService.deleteUserById(id).subscribe(function () {
+            _this.authService.logout();
+            _this.router.navigateByUrl("/login");
+        });
+    };
+    ProfileComponent.prototype.editUser = function (id) {
     };
     ProfileComponent = __decorate([
         core_1.Component({

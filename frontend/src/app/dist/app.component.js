@@ -9,8 +9,9 @@ exports.__esModule = true;
 exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
-        this.title = 'Task Manager';
+    function AppComponent(titleService) {
+        this.titleService = titleService;
+        this.titleService.setTitle("Task Manager");
     }
     AppComponent = __decorate([
         core_1.Component({

@@ -46,4 +46,8 @@ export class UserService {
     );
   }
 
+  deleteUserById(id: number): Observable<User> {
+    return this.http.delete<User>(`${apiUrl}/${id}`);
+  }
+
 }

@@ -46,6 +46,37 @@ export class EditUserComponent implements OnInit {
     })
   }
 
+  getUsernameErrorMessage() {
+
+    if(!this.editUserForm.value.username.required) {
+      return "Username is required";
+    }
+    
+    if(!this.editUserForm.value.username.minLength) {
+      return "Username must be 5 characters min.";
+    } 
+
+    return "Form invalid";
+    
+  }
+
+
+  getNameErrorMessage() {
+    if(!this.editUserForm.value.name.required) {
+      return "Name is required";
+    }
+
+    return "Form invalid"
+  }
+
+  getPasswordErrorMessage() {
+    if(!this.editUserForm.value.password.required) {
+      return "Password is required";
+    }
+
+    return "Form invalid"
+  }
+
   onSubmit(editUserData: any) {
     if (!this.editUserForm.valid) {
       this.dialog.open(InvalidRegisterFormModal);

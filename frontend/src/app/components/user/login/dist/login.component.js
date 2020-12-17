@@ -21,6 +21,21 @@ var LoginComponent = /** @class */ (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
+    LoginComponent.prototype.getUsernameErrorMessage = function () {
+        if (!this.loginForm.value.username.required) {
+            return "Username is required";
+        }
+        if (!this.loginForm.value.username.minLength) {
+            return "Username must be 5 characters min.";
+        }
+        return "Form invalid";
+    };
+    LoginComponent.prototype.getPasswordErrorMessage = function () {
+        if (!this.loginForm.value.password.required) {
+            return "Password is required";
+        }
+        return "Form invalid";
+    };
     LoginComponent.prototype.onSubmit = function (loginData) {
         var _this = this;
         if (!this.loginForm.valid) {

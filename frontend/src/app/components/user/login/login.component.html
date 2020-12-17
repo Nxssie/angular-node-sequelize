@@ -3,13 +3,17 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-12">
-          <img src="src/app/components/user/images/logo.png" alt="task-manager logo"/>
+          <p align="center">
+            <img src="assets/images/logo.png" alt="task-manager logo" widht="96" height="96"/>
+          </p>
+          
           <h1>Login</h1>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
             <p>
               <mat-form-field class="full-width-field" appearance="outline">
                 <mat-label>Username:</mat-label>
                 <input matInput name="username" formControlName="username" />
+                <mat-error *ngIf="!loginForm.value.username.valid"> {{getUsernameErrorMessage()}} </mat-error>
               </mat-form-field>
             </p>
 
@@ -17,6 +21,7 @@
               <mat-form-field class="full-width-field" appearance="outline">
                 <mat-label>Password:</mat-label>
                 <input matInput type="password" formControlName="password" />
+                <mat-error *ngIf="!loginForm.value.password.valid"> {{getPasswordErrorMessage()}} </mat-error>
               </mat-form-field>
             </p>
 

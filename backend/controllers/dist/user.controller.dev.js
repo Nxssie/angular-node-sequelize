@@ -7,9 +7,7 @@ var Op = db.Sequelize.Op;
 
 var utils = require("../utils");
 
-var bcrypt = require('bcryptjs');
-
-var fs = require("fs"); // Create and Save a new User
+var bcrypt = require('bcryptjs'); // Create and Save a new User
 
 
 exports.create = function (req, res) {
@@ -97,11 +95,10 @@ exports.update = function (req, res) {
   var id = req.params.id;
   var user = {
     username: req.body.username,
-    password: req.body.password,
+    password: bcrypt.hashSync(req.body.password),
     name: req.body.name,
     updatedAt: new Date()
   };
-  user.password = bcrypt.hashSync(req.body.password);
   User.update(user, {
     where: {
       id: id

@@ -54,26 +54,35 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getErrorMessage() {
+  getUsernameErrorMessage() {
 
     if(!this.registerForm.value.username.required) {
       return "Username is required";
     }
     
-    if(!this.registerForm.value.name.required) {
-      return "Name is required";
-    }
-    
-    if(!this.registerForm.value.password.required) {
-      return "Password is required";
-    }
-
     if(!this.registerForm.value.username.minLength) {
       return "Username must be 5 characters min.";
     } 
 
     return "Form invalid";
     
+  }
+
+
+  getNameErrorMessage() {
+    if(!this.registerForm.value.name.required) {
+      return "Name is required";
+    }
+
+    return "Form invalid"
+  }
+
+  getPasswordErrorMessage() {
+    if(!this.registerForm.value.password.required) {
+      return "Password is required";
+    }
+
+    return "Form invalid"
   }
 
   onSubmit(userData: any) {

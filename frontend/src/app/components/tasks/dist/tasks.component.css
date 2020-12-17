@@ -1,3 +1,4 @@
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 #task-done {
   position: absolute;
   display: block;
@@ -50,6 +51,12 @@
   font-weight: 300;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.modal-button {
+  color: #ffffff;
+  background-color: #C2185B;
+  margin: 1em 1em 0 0;
 }
 
 @media (min-width: 576px) {

@@ -6,13 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.EditTasksComponent = void 0;
+exports.InvalidEditFormModal = exports.EditTasksComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var EditTasksComponent = /** @class */ (function () {
-    function EditTasksComponent(taskService, userService, router, fb) {
+    function EditTasksComponent(taskService, userService, dialog, router, fb) {
         this.taskService = taskService;
         this.userService = userService;
+        this.dialog = dialog;
         this.router = router;
         this.fb = fb;
         this.taskID = +localStorage.getItem("ACTUAL_TASK");
@@ -44,11 +45,22 @@ var EditTasksComponent = /** @class */ (function () {
             });
         });
     };
+    EditTasksComponent.prototype.getTitleErrorMessage = function () {
+        if (!this.editForm.value.title.required) {
+            return "Title is required";
+        }
+        return "Form invalid";
+    };
+    EditTasksComponent.prototype.getDescriptionErrorMessage = function () {
+        if (!this.editForm.value.description.required) {
+            return "Description is required";
+        }
+        return "Form invalid";
+    };
     EditTasksComponent.prototype.onSubmit = function (taskData) {
         var _this = this;
         if (!this.editForm.valid) {
-            console.warn('Please provide all the required values!');
-            console.log(taskData);
+            this.dialog.open(InvalidEditFormModal);
         }
         else {
             var task = {
@@ -80,3 +92,20 @@ var EditTasksComponent = /** @class */ (function () {
     return EditTasksComponent;
 }());
 exports.EditTasksComponent = EditTasksComponent;
+var InvalidEditFormModal = /** @class */ (function () {
+    function InvalidEditFormModal(dialogRef) {
+        this.dialogRef = dialogRef;
+    }
+    InvalidEditFormModal.prototype.onClose = function () {
+        this.dialogRef.close();
+    };
+    InvalidEditFormModal = __decorate([
+        core_1.Component({
+            selector: 'invalid-task-form-model',
+            templateUrl: 'invalid-task-form-model.html',
+            styleUrls: ['./edit-tasks.component.sass']
+        })
+    ], InvalidEditFormModal);
+    return InvalidEditFormModal;
+}());
+exports.InvalidEditFormModal = InvalidEditFormModal;

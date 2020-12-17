@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
 import { User } from 'src/app/models/user.model';
@@ -22,6 +23,7 @@ export class EditTasksComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private userService: UserService,
+    public dialog: MatDialog,
     private router: Router,
     public fb: FormBuilder
   ) {
@@ -53,10 +55,26 @@ export class EditTasksComponent implements OnInit {
     });
   }
 
+  getTitleErrorMessage() {
+    if(!this.editForm.value.title.required) {
+      return "Title is required";
+    }
+
+    return "Form invalid";
+    
+  }
+
+  getDescriptionErrorMessage() {
+    if(!this.editForm.value.description.required) {
+      return "Description is required";
+    }
+
+    return "Form invalid"
+  }
+
   onSubmit(taskData: any) {
     if(!this.editForm.valid) {
-      console.warn('Please provide all the required values!');
-      console.log(taskData);
+      this.dialog.open(InvalidEditFormModal);
     } else {
       let task = {
         id: null,
@@ -77,4 +95,21 @@ export class EditTasksComponent implements OnInit {
       this.user = user;
     });
   }
+}
+
+@Component({
+  selector: 'invalid-task-form-model',
+  templateUrl: 'invalid-task-form-model.html',
+  styleUrls: ['./edit-tasks.component.sass']
+})
+export class InvalidEditFormModal {
+
+  constructor(
+    public dialogRef: MatDialogRef<InvalidEditFormModal>
+  ) {}
+
+  onClose(): void {
+    this.dialogRef.close();
+  }
+
 }
