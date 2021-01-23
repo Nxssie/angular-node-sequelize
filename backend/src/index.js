@@ -66,6 +66,7 @@ app.use(function (req, res, next) {
 
 require("../routes/user.routes")(app);
 require("../routes/task.routes")(app);
+require("../routes/reports.routes")(app);
 
 app.listen(port, () => {
   console.log('Server started on: ' + port);

@@ -86,6 +86,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.deleteUserById = function (id) {
         return this.http["delete"](apiUrl + "/" + id);
     };
+    UserService.prototype.getNumberOfTasksById = function (id) {
+        return this.http.get("http://localhost:4000/api/tasks/user/" + id);
+    };
     UserService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

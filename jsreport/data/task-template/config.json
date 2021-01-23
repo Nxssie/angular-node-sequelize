@@ -1,0 +1,19 @@
+{
+    "shortid": "JujewK4ESi",
+    "name": "task-template",
+    "recipe": "chrome-pdf",
+    "engine": "handlebars",
+    "chrome": {
+        "printBackground": true
+    },
+    "creationDate": {
+        "$$date": 1611084961881
+    },
+    "modificationDate": {
+        "$$date": 1611257957638
+    },
+    "_id": "Wk0cvzHh5lAz35Fa",
+    "$entitySet": "templates",
+    "data": null,
+    "scripts": []
+}

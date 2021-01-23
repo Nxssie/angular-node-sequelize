@@ -177,3 +177,7 @@ exports.findUserByUsernameAndPassword = function (req, res) {
     });
   });
 };
+
+exports.getCounter = function (req, res) {
+  var id = req.params.id;
+};

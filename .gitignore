@@ -8,3 +8,6 @@
 /frontend/node_modules
 /frontend/.env
 /frontend/.idea/
+
+/jsreport/node_modules
+/jsreport/logs/

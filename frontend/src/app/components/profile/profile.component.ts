@@ -37,6 +37,13 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  generateReport(id: number) {
+    this.userService.getNumberOfTasksById(id).subscribe((counter) => {
+      window.open(`http://localhost:4000/api/reports/${this.user.username}/${counter}`);
+    })
+    
+  }
+
   editUser(id: number) {
     
   }

@@ -50,4 +50,7 @@ export class UserService {
     return this.http.delete<User>(`${apiUrl}/${id}`);
   }
 
+  getNumberOfTasksById(id: number): Observable<number> {
+    return this.http.get<number>(`http://localhost:4000/api/tasks/user/${id}`);
+  }
 }

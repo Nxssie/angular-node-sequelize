@@ -31,6 +31,12 @@ var ProfileComponent = /** @class */ (function () {
             _this.router.navigateByUrl("/login");
         });
     };
+    ProfileComponent.prototype.generateReport = function (id) {
+        var _this = this;
+        this.userService.getNumberOfTasksById(id).subscribe(function (counter) {
+            window.open("http://localhost:4000/api/reports/" + _this.user.username + "/" + counter);
+        });
+    };
     ProfileComponent.prototype.editUser = function (id) {
     };
     ProfileComponent = __decorate([
